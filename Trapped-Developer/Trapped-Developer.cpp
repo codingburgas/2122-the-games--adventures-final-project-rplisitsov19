@@ -3,5 +3,7 @@
 using namespace std;
 int main()
 {
-    
+	intro();
+	next();
+
 }
