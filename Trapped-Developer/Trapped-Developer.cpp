@@ -3,9 +3,10 @@
 using namespace std;
 int main()
 {
-	int playerHP = 2;
+	int playerHP = 25;
 	int enemyHP, enemyDMG; // DMG = damage
 	int win = 0; // win: 0 = no one yet, 1 = player, 2 = enemy
+	weapon stick(5, "Stick"), sword(15, "Cutting edge Sword"), spear(10, "Spaghetti Spear"), shield(7, "Salvaged Shield"); //Cutting edge Sword, Spaghetti Spear, Salvaged Shield
 
 	intro();
 	next();

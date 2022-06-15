@@ -9,6 +9,17 @@ string preRow[3] = { " __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ 
 					 "|__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __|" };
 //(text row preset) cout << "|     |\n";
 
+struct weapon
+{
+	weapon(int dmg, string name)
+	{
+		dmg = weapon::dmg;
+		name = weapon::name;
+	}
+	int dmg;
+	string name;
+};
+
 void next()
 {
 	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
