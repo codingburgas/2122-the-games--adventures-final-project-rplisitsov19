@@ -4,25 +4,107 @@ using namespace std;
 
 int main()
 {
-	int playerHP = 25;
-	int win = 0; // win: 0 = no one yet, 1 = player, 2 = enemy
-	weapon stick(5, "Stick"), sword(15, "Cutting edge Sword"), spear(10, "Spaghetti Spear"), shield(7, "Salvaged Shield");
-	enemy wolf(10, "Saber Wolf"), vent(20, "Vent"), muson(25, "Muson"), prez(30, "The President");
-	wolf.wpn = sword.name;
-	wolf.dmg = sword.dmg;
-	vent.wpn = spear.name;
-	vent.dmg = spear.dmg;
-	muson.wpn = shield.name;
-	muson.dmg = shield.dmg;
-	prez.wpn = "Nanomachines";
-	prez.dmg = 6;
-
-	intro();
+	int playerHp = 25;
+	int act = 0, turn = 1, state = 1;
+	setEnemyWpn();
+	
+	text(act, 0); //0 = not in battle
+	act++;
 	next();
-	while (win == 0)
-	{
-		stats(playerHP, stick.dmg, stick.name, wolf.hp, wolf.name, wolf.dmg); //first enemy 'Saber Wolf'
 
+	while (checkHp(playerHp, wolf.hp) == 0)
+	{
+		stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.name, wolf.dmg); //first enemy 'Saber Wolf'
+		text(act, turn);
+		if (state == 1)
+		{
+			//attack();
+			state++;
+		}
+		else if (state == 2)
+		{
+			//enemyAttack();
+			state++;
+		}
+		else
+		{
+			//defend();
+			state = 1;
+		}
+		turn++;
+		next();
 	}
-	win = 0;
+	act++;
+
+	while (checkHp(playerHp, vent.hp) == 0)
+	{
+		stats(playerHp, stick.dmg, stick.name, vent.hp, vent.name, vent.dmg); //first enemy 'Saber Wolf'
+		text(act, turn);
+		if (state == 1)
+		{
+			//attack();
+			state++;
+		}
+		else if (state == 2)
+		{
+			//enemyAttack();
+			state++;
+		}
+		else
+		{
+			//defend();
+			state = 1;
+		}
+		turn++;
+		next();
+	}
+	act++;
+
+	while (checkHp(playerHp, muson.hp) == 0)
+	{
+		stats(playerHp, stick.dmg, stick.name, muson.hp, muson.name, muson.dmg); //first enemy 'Saber Wolf'
+		text(act, turn);
+		if (state == 1)
+		{
+			//attack();
+			state++;
+		}
+		else if (state == 2)
+		{
+			//enemyAttack();
+			state++;
+		}
+		else
+		{
+			//defend();
+			state = 1;
+		}
+		turn++;
+		next();
+	}
+	act++;
+
+	while (checkHp(playerHp, prez.hp) == 0)
+	{
+		stats(playerHp, stick.dmg, stick.name, prez.hp, prez.name, prez.dmg); //first enemy 'Saber Wolf'
+		text(act, turn);
+		if (state == 1)
+		{
+			//attack();
+			state++;
+		}
+		else if (state == 2)
+		{
+			//enemyAttack();
+			state++;
+		}
+		else
+		{
+			//defend();
+			state = 1;
+		}
+		turn++;
+		next();
+	}
+	act++;
 }
