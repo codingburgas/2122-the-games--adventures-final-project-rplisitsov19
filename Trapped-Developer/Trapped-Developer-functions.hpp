@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-bool state, hit = 1;
+bool state, hit = 0, charge = 0;
 int act, turn, playerHp, enemyHp, playerDmg, enemyDmg;
 string preRow[3] = { "  __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __",
 					 " |                                                                                         |",
@@ -46,6 +46,7 @@ void setEnemyWpn()
 
 void next()
 {
+	cout << " ";
 	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 	system("CLS");
 }
@@ -336,19 +337,47 @@ int checkHp(int player, int enemyhp)
 	}
 }
 
+int checkFunc(string func)
+{
+	if (func == "Hit" || func == "Slash")
+	{
+		return hit;
+	}
+	else if (func == "Charge")
+	{
+		return charge;
+	}
+	else
+	{
+		return 2;
+	}
+}
+
 int funcExe(string func)
 {
-	if ((func == "Hit" || func == "Slash") && hit)
+	if (func == "Hit" || func == "Slash")
 	{
 		if (state)
 		{
-			return playerDmg;
+			hit++;
+			return playerDmg;			
 		}
 		else
 		{
 			return enemyDmg;
+		}		
+	}
+	else if (func == "Charge")
+	{
+		if (state)
+		{
+			return 9;
+			charge++;
 		}
-		hit = 0;
+		else
+		{
+			return 9;
+		}
 	}
 }
 int enemyAttack()

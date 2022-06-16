@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include "Trapped-Developer-functions.hpp"
 using namespace std;
 
@@ -20,7 +21,19 @@ int main()
 		text(act, turn);
 		if (state)
 		{
-			cin >> funcName;
+			cout << "\n *type a function to attack* \n ";
+			do {
+				cin >> funcName;
+				if (checkFunc(funcName) == 2)
+				{
+					cout << " This is an illogical function! I have to type a logical one. ";
+				}
+				else
+				{
+					cout << " I have already used this function and I can't use it again! I have to think of another function. ";
+				}				
+			} while (checkFunc(funcName) > 0);
+			system("CLS");
 			wolf.hp = attack(1, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg);
 		}
 		else
@@ -48,7 +61,19 @@ int main()
 			text(act, turn);
 			if (state)
 			{
-				cin >> funcName;
+				cout << "\n *type a function to attack* \n ";
+				do {
+					cin >> funcName;
+					if (checkFunc(funcName) == 2)
+					{
+						cout << " This is an illogical function! I have to type a logical one. ";
+					}
+					else
+					{
+						cout << " I have already used this function and I can't use it again! I have to think of another function. ";
+					}
+				} while (checkFunc(funcName) > 0);
+				system("CLS");
 				muson.hp = attack(1, funcName, playerHp, muson.hp, sword.dmg, muson.dmg);
 			}
 			else
@@ -73,7 +98,19 @@ int main()
 			text(act, turn);
 			if (state)
 			{
-				cin >> funcName;
+				cout << "\n *type a function to attack* \n ";
+				do {
+					cin >> funcName;
+					if (checkFunc(funcName) == 2)
+					{
+						cout << " This is an illogical function! I have to type a logical one. ";
+					}
+					else
+					{
+						cout << " I have already used this function and I can't use it again! I have to think of another function. ";
+					}
+				} while (checkFunc(funcName) > 0);
+				system("CLS");
 				vent.hp = attack(1, funcName, playerHp, vent.hp, sword.dmg, vent.dmg);
 			}
 			else
@@ -100,7 +137,19 @@ int main()
 		text(act, turn);
 		if (state)
 		{
-			cin >> funcName;
+			cout << "\n *type a function to attack* \n ";
+			do {
+				cin >> funcName;
+				if (checkFunc(funcName) == 2)
+				{
+					cout << " This is an illogical function! I have to type a logical one. ";
+				}
+				else
+				{
+					cout << " I have already used this function and I can't use it again! I have to think of another function. ";
+				}
+			} while (checkFunc(funcName) > 0);
+			system("CLS");
 			prez.hp = attack(1, funcName, playerHp, prez.hp, wpnDmg, prez.dmg);
 		}
 		else
