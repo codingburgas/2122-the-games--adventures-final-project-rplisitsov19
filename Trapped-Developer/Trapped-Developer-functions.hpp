@@ -4,11 +4,12 @@
 #include <string>
 using namespace std;
 
+bool state, hit = 1;
+int act, turn, playerHp, enemyHp, playerDmg, enemyDmg;
 string preRow[3] = { "  __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __",
 					 " |                                                                                         |",
 					 " |__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __|" };
 //(text row preset) cout << "|     |\n";
-
 struct weapon
 {
 	weapon(int dmg, string name)
@@ -19,7 +20,6 @@ struct weapon
 	int dmg;
 	string name;
 }stick(5, "Stick"), sword(15, "Cutting edge Sword"), spear(10, "Spaghetti Spear"), shield(7, "Salvaged Shield");;
-
 struct enemy
 {
 	enemy(int hp, string name)
@@ -32,7 +32,6 @@ struct enemy
 	string wpn;
 	int dmg;
 }wolf(10, "Saber Wolf"), vent(20, "Vent"), muson(25, "Muson"), prez(30, "The President");
-
 void setEnemyWpn()
 {
 	wolf.wpn = sword.name;
@@ -53,6 +52,10 @@ void next()
 
 string playerStats(int hp, string wpn, int dmg, int row) //hp = health points, wpnNum = weapon number
 {
+	if (hp < 0)
+	{
+		hp = 0;
+	}
 	string hpText(1, char(hp) + 48);
 	string dmgText(1, char(dmg) + 48);
 	string space1, space2; //dmg = damage, space1 = empty space for first row
@@ -108,22 +111,26 @@ string playerStats(int hp, string wpn, int dmg, int row) //hp = health points, w
 }
 string enemyStats(int hp, string name, int dmg, int row)
 {
+	if (hp < 0)
+	{
+		hp = 0;
+	}
 	string hpText(1, char(hp) + 48);
 	string dmgText(1, char(dmg) + 48);
 	string space1, space2;
-	int sp1Len = 2, sp2Len = 1;
+	int sp1Len = 1, sp2Len = 1;
 
 	if (name == "Saber Wolf")
 	{
-		sp1Len += 2;
+		sp1Len += 3;
 	}
 	else if (name == "Vent")
 	{
-		sp1Len += 8;
+		sp1Len += 9;
 	}
 	else if (name == "Muson")
 	{
-		sp1Len += 7;
+		sp1Len += 8;
 	}
 
 	if (dmg > 9)
@@ -190,10 +197,10 @@ string preRowFunc(int row, int len, char c, bool side)
 		return line;
 	}
 }
-void stats(int playerHp, int wpnDmg, string wpnName, int enemyhp, string enemyName, int enemyDmg)
+void stats(int playerhp, int wpnDmg, string wpnName, int enemyhp, int enemydmg, string enemyName)
 {
-	int rowLen1 = size(playerStats(playerHp, wpnName, wpnDmg, 3));
-	int rowLen2 = size(enemyStats(enemyhp, enemyName, enemyDmg, 3));
+	int rowLen1 = size(playerStats(playerhp, wpnName, wpnDmg, 3));
+	int rowLen2 = size(enemyStats(enemyhp, enemyName, enemydmg, 3));
 	int gapSpace = size(preRow[1]) - (rowLen1 + rowLen2);
 	rowLen1 -= 3;
 	rowLen2 -= 2;
@@ -205,14 +212,17 @@ void stats(int playerHp, int wpnDmg, string wpnName, int enemyhp, string enemyNa
 
 	cout << preRowFunc(0, rowLen1, '_', 1) << gap << preRowFunc(0, rowLen2, '_', 0) << endl;
 	cout << preRowFunc(1, rowLen1, ' ', 1) << gap << preRowFunc(1, rowLen2, ' ', 0) << endl;
-	cout << playerStats(playerHp, wpnName, wpnDmg, 1) << gap << enemyStats(enemyhp, enemyName, enemyDmg, 1) << endl;
-	cout << playerStats(playerHp, wpnName, wpnDmg, 2) << gap << enemyStats(enemyhp, enemyName, enemyDmg, 2) << endl;
-	cout << playerStats(playerHp, wpnName, wpnDmg, 3) << gap << enemyStats(enemyhp, enemyName, enemyDmg, 3) << endl;
+	cout << playerStats(playerhp, wpnName, wpnDmg, 1) << gap << enemyStats(enemyhp, enemyName, enemydmg, 1) << endl;
+	cout << playerStats(playerhp, wpnName, wpnDmg, 2) << gap << enemyStats(enemyhp, enemyName, enemydmg, 2) << endl;
+	cout << playerStats(playerhp, wpnName, wpnDmg, 3) << gap << enemyStats(enemyhp, enemyName, enemydmg, 3) << endl;
 	cout << preRowFunc(2, rowLen1, '_', 1) << gap << preRowFunc(2, rowLen2, '_', 0) << endl;
 }
 
-void text(int act, int turn)
+void text(int actMain, int turnMain)
 {
+	act = actMain;
+	turn = turnMain;
+
 	cout << preRow[0] << endl << preRow[1] << endl;
 	switch (act)
 	{
@@ -229,9 +239,83 @@ void text(int act, int turn)
 	case 1:
 		switch (turn)
 		{
+		case 0:
+			//finishing blow, you managed to defeat the enemy
+			break;
+
 		case 1:
+			//oh no it's a monster you have to attack
+			break;
+
+		case 2:
+
+			break;
+
+		default:
+
 			break;
 		}
+	case 2:
+
+		switch (turn)
+		{
+		case 0:
+			//finishing blow, you managed to defeat the enemy
+			break;
+
+		case 1:
+			//oh no it's a monster you have to attack
+			break;
+
+		case 2:
+
+			break;
+
+		default:
+
+			break;
+		}
+	case 3:
+		switch (turn)
+		{
+		case 0:
+			//finishing blow, you managed to defeat the enemy
+			break;
+
+		case 1:
+			//oh no it's a monster you have to attack
+			break;
+
+		case 2:
+
+			break;
+
+		default:
+
+			break;
+		}
+	case 4:
+		switch (turn)
+		{
+		case 0:
+			//finishing blow, you managed to defeat the enemy
+			break;
+
+		case 1:
+			//oh no it's a monster you have to attack
+			break;
+
+		case 2:
+
+			break;
+
+		default:
+
+			break;
+		}
+	case 5:
+		//epilogue
+		break;
 	}
 	cout << preRow[2] << endl;
 }
@@ -252,7 +336,47 @@ int checkHp(int player, int enemyhp)
 	}
 }
 
-void attack(bool state)
+int funcExe(string func)
 {
-	
+	if ((func == "Hit" || func == "Slash") && hit)
+	{
+		if (state)
+		{
+			return playerDmg;
+		}
+		else
+		{
+			return enemyDmg;
+		}
+		hit = 0;
+	}
+}
+int enemyAttack()
+{
+	switch (turn / 2)
+	{
+	case 1:
+		return funcExe("Hit");
+		break;
+
+	default:
+
+		break;
+	}
+}
+int attack(bool stateMain, string func, int playerHpMain, int enemyHpMain, int playerDmgMain, int enemyDmgMain)
+{
+	state = stateMain;
+	playerDmg = playerDmgMain;
+	enemyDmg = enemyDmgMain;
+	playerHp = playerHpMain;
+	enemyHp = enemyHpMain;
+	if (state)
+	{
+		return enemyHp - funcExe(func); //= enemyHp - funcExe(playerDmg + enemyHp) = -playerDmg
+	}
+	else
+	{
+		return playerHp - enemyAttack();
+	}
 }
