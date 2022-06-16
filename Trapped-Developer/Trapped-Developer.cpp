@@ -4,8 +4,10 @@ using namespace std;
 
 int main()
 {
-	int playerHp = 25;
-	int act = 0, turn = 1, state = 1;
+	int playerHp = 25, wpnDmg;
+	int act = 0, turn = 1;
+	bool state = 0, choice;
+	string wpnName;
 	setEnemyWpn();
 	
 	text(act, 0); //0 = not in battle
@@ -16,95 +18,57 @@ int main()
 	{
 		stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.name, wolf.dmg); //first enemy 'Saber Wolf'
 		text(act, turn);
-		if (state == 1)
-		{
-			//attack();
-			state++;
-		}
-		else if (state == 2)
-		{
-			//enemyAttack();
-			state++;
-		}
-		else
-		{
-			//defend();
-			state = 1;
-		}
+		attack(state);
+		state = !state;
 		turn++;
 		next();
 	}
 	act++;
 
-	while (checkHp(playerHp, vent.hp) == 0)
-	{
-		stats(playerHp, stick.dmg, stick.name, vent.hp, vent.name, vent.dmg); //first enemy 'Saber Wolf'
-		text(act, turn);
-		if (state == 1)
-		{
-			//attack();
-			state++;
-		}
-		else if (state == 2)
-		{
-			//enemyAttack();
-			state++;
-		}
-		else
-		{
-			//defend();
-			state = 1;
-		}
-		turn++;
-		next();
-	}
-	act++;
+	cin >> choice;
 
-	while (checkHp(playerHp, muson.hp) == 0)
+	if (choice)
 	{
-		stats(playerHp, stick.dmg, stick.name, muson.hp, muson.name, muson.dmg); //first enemy 'Saber Wolf'
-		text(act, turn);
-		if (state == 1)
+		while (checkHp(playerHp, muson.hp) == 0)
 		{
-			//attack();
-			state++;
+			stats(playerHp, sword.dmg, sword.name, muson.hp, muson.name, muson.dmg); //second enemy B 'Muson'
+			text(act, turn);
+			attack(state);
+			state = !state;
+			turn++;
+			next();
 		}
-		else if (state == 2)
-		{
-			//enemyAttack();
-			state++;
-		}
-		else
-		{
-			//defend();
-			state = 1;
-		}
-		turn++;
-		next();
+		act++;
+		wpnDmg = shield.dmg;
+		wpnName = shield.name;
 	}
-	act++;
+	else
+	{
+		while (checkHp(playerHp, vent.hp) == 0)
+		{
+			stats(playerHp, sword.dmg, sword.name, vent.hp, vent.name, vent.dmg); //second enemy A 'Vent'
+			text(act, turn);
+			attack(state);
+			state = !state;
+			turn++;
+			next();
+		}
+		act++;
+		wpnDmg = spear.dmg;
+		wpnName = spear.name;
+	}
 
 	while (checkHp(playerHp, prez.hp) == 0)
 	{
-		stats(playerHp, stick.dmg, stick.name, prez.hp, prez.name, prez.dmg); //first enemy 'Saber Wolf'
+		stats(playerHp, wpnDmg, wpnName, prez.hp, prez.name, prez.dmg); //boss 'The President'
 		text(act, turn);
-		if (state == 1)
-		{
-			//attack();
-			state++;
-		}
-		else if (state == 2)
-		{
-			//enemyAttack();
-			state++;
-		}
-		else
-		{
-			//defend();
-			state = 1;
-		}
+		attack(state);
+		state = !state;
 		turn++;
 		next();
 	}
 	act++;
+
+	text(act, 0);
+	next();
 }

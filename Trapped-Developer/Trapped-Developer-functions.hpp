@@ -251,3 +251,8 @@ int checkHp(int player, int enemyhp)
 		return 0;
 	}
 }
+
+void attack(bool state)
+{
+	
+}
