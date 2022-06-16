@@ -98,7 +98,7 @@ int main()
 			text(act, turn);
 			if (state)
 			{
-				cout << "\n *type a function to attack* \n ";
+				cout << "\n *type a function to attack, start it with a capital letter* \n ";
 				do {
 					cin >> funcName;
 					if (checkFunc(funcName) == 2)

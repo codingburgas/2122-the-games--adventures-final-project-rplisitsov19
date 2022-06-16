@@ -380,19 +380,6 @@ int funcExe(string func)
 		}
 	}
 }
-int enemyAttack()
-{
-	switch (turn / 2)
-	{
-	case 1:
-		return funcExe("Hit");
-		break;
-
-	default:
-
-		break;
-	}
-}
 int attack(bool stateMain, string func, int playerHpMain, int enemyHpMain, int playerDmgMain, int enemyDmgMain)
 {
 	state = stateMain;
@@ -406,6 +393,6 @@ int attack(bool stateMain, string func, int playerHpMain, int enemyHpMain, int p
 	}
 	else
 	{
-		return playerHp - enemyAttack();
+		return playerHp - funcExe("Hit");
 	}
 }
