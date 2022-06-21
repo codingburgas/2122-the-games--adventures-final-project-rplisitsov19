@@ -1,170 +1,185 @@
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 #include "Trapped-Developer-functions.hpp"
 using namespace std;
 
 int main()
 {
+	int game;
 	int playerHp = 25, wpnDmg;
 	int act = 0, turn = 1;
 	bool state = 1, choice;
 	string wpnName, funcName = "";
+	funcSet();
 	setEnemyWpn();
-	
-	text(act, 0); //0 = not in battle
-	act++;
-	next();
 
-	while (checkHp(playerHp, wolf.hp) == 0)
+	while (true)
 	{
-		stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name); //first enemy 'Saber Wolf'
-		text(act, turn);
-		if (state)
-		{
-			cout << "\n *type a function to attack* \n ";
-			do {
-				cin >> funcName;
-				if (checkFunc(funcName) == 2)
-				{
-					cout << " This is an illogical function! I have to type a logical one. ";
-				}
-				else
-				{
-					cout << " I have already used this function and I can't use it again! I have to think of another function. ";
-				}				
-			} while (checkFunc(funcName) > 0);
-			system("CLS");
-			wolf.hp = attack(1, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg);
-		}
-		else
-		{
-			playerHp = attack(0, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg);
-		}
-		state = !state;
-		turn++;
+		cin >> game;
+		next();		
+
+		text(act, 0); //0 = not in battle
+		act++;
 		next();
-	}
-	stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name);
-	text(act, 0);
-	next();
-	turn = 1;
-	state = 1;
 
-	cin >> choice;
-
-	if (choice)
-	{
-		act = 2;
-		while (checkHp(playerHp, muson.hp) == 0)
+		while (checkHp(playerHp, wolf.hp) == 0)
 		{
-			stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name); //second enemy B 'Muson'
+			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name); //first enemy 'Saber Wolf'
 			text(act, turn);
 			if (state)
 			{
-				cout << "\n *type a function to attack* \n ";
+				type();
 				do {
 					cin >> funcName;
-					if (checkFunc(funcName) == 2)
-					{
-						cout << " This is an illogical function! I have to type a logical one. ";
-					}
-					else
-					{
-						cout << " I have already used this function and I can't use it again! I have to think of another function. ";
-					}
+					wrongFunc(funcName);
 				} while (checkFunc(funcName) > 0);
 				system("CLS");
-				muson.hp = attack(1, funcName, playerHp, muson.hp, sword.dmg, muson.dmg);
+				wolf.hp = damage(1, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg, act, turn);
 			}
 			else
 			{
-				playerHp = attack(0, funcName, playerHp, muson.hp, sword.dmg, muson.dmg);
+				playerHp = damage(0, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg, act, turn);
 			}
 			state = !state;
 			turn++;
 			next();
 		}
-		stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name);
-		text(act, 0);
-		wpnDmg = shield.dmg;
-		wpnName = shield.name;
-	}
-	else
-	{
-		act = 3;
-		while (checkHp(playerHp, vent.hp) == 0)
+
+		if (checkHp(playerHp, 1) != 2)
 		{
-			stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name); //second enemy A 'Vent'
-			text(act, turn);
-			if (state)
+			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name);
+			text(act, 0);
+			next();
+			turn = 1;
+			state = 1;
+
+			cin >> choice;
+			next();
+			if (choice)
 			{
-				cout << "\n *type a function to attack, start it with a capital letter* \n ";
-				do {
-					cin >> funcName;
-					if (checkFunc(funcName) == 2)
+				act = 2;
+				while (checkHp(playerHp, muson.hp) == 0)
+				{
+					stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name); //second enemy B 'Muson'
+					text(act, turn);
+					if (state)
 					{
-						cout << " This is an illogical function! I have to type a logical one. ";
+						type();
+						do {
+							cin >> funcName;
+							wrongFunc(funcName);
+						} while (checkFunc(funcName) > 0);
+						system("CLS");
+						muson.hp = damage(1, funcName, playerHp, muson.hp, sword.dmg, muson.dmg, act, turn);
 					}
 					else
 					{
-						cout << " I have already used this function and I can't use it again! I have to think of another function. ";
+						playerHp = damage(0, funcName, playerHp, muson.hp, sword.dmg, muson.dmg, act, turn);
 					}
-				} while (checkFunc(funcName) > 0);
-				system("CLS");
-				vent.hp = attack(1, funcName, playerHp, vent.hp, sword.dmg, vent.dmg);
+					state = !state;
+					turn++;
+					next();
+				}
+
+				if (checkHp(playerHp, 1) != 2)
+				{
+					stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name);
+					text(act, 0);
+					next();
+					wpnDmg = shield.dmg;
+					wpnName = shield.name;
+				}
 			}
 			else
 			{
-				playerHp = attack(0, funcName, playerHp, vent.hp, sword.dmg, vent.dmg);
-			}
-			state = !state;
-			turn++;
-			next();
-		}
-		stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name);
-		text(act, 0);
-		wpnDmg = spear.dmg;
-		wpnName = spear.name;
-	}
-	next();
-	turn = 1;
-	state = 1;
-	act = 4;
-
-	while (checkHp(playerHp, prez.hp) == 0)
-	{
-		stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name); //boss 'The President'
-		text(act, turn);
-		if (state)
-		{
-			cout << "\n *type a function to attack* \n ";
-			do {
-				cin >> funcName;
-				if (checkFunc(funcName) == 2)
+				act = 3;
+				while (checkHp(playerHp, vent.hp) == 0)
 				{
-					cout << " This is an illogical function! I have to type a logical one. ";
+					stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name); //second enemy A 'Vent'
+					text(act, turn);
+					if (state)
+					{
+						type();
+						do {
+							cin >> funcName;
+							wrongFunc(funcName);
+						} while (checkFunc(funcName) > 0);
+						system("CLS");
+						vent.hp = damage(1, funcName, playerHp, vent.hp, sword.dmg, vent.dmg, act, turn);
+					}
+					else
+					{
+						playerHp = damage(0, funcName, playerHp, vent.hp, sword.dmg, vent.dmg, act, turn);
+					}
+					state = !state;
+					turn++;
+					next();
+				}
+
+				if (checkHp(playerHp, 1) != 2)
+				{
+					stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name);
+					text(act, 0);
+					next();
+					wpnDmg = spear.dmg;
+					wpnName = spear.name;
+				}
+			}			
+		}
+
+		if (checkHp(playerHp, 1) != 2)
+		{
+			turn = 1;
+			state = 1;
+			act = 4;
+
+			while (checkHp(playerHp, prez.hp) == 0)
+			{
+				stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name); //boss 'The President'
+				text(act, turn);
+				if (state)
+				{
+					type();
+					do {
+						cin >> funcName;
+						wrongFunc(funcName);
+					} while (checkFunc(funcName) > 0);
+					system("CLS");
+					prez.hp = damage(1, funcName, playerHp, prez.hp, wpnDmg, prez.dmg, act, turn);
 				}
 				else
 				{
-					cout << " I have already used this function and I can't use it again! I have to think of another function. ";
+					if (funcName == "Throw")
+					{
+						funcThrow();
+						playerHp = 0;
+					}
+					else
+					{
+						playerHp = damage(0, funcName, playerHp, prez.hp, wpnDmg, prez.dmg, act, turn);
+					}					
 				}
-			} while (checkFunc(funcName) > 0);
-			system("CLS");
-			prez.hp = attack(1, funcName, playerHp, prez.hp, wpnDmg, prez.dmg);
-		}
-		else
-		{
-			playerHp = attack(0, funcName, playerHp, prez.hp, wpnDmg, prez.dmg);
-		}
-		state = !state;
-		turn++;
-		next();
-	}
-	stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name);
-	text(act, 0);
-	next();
-	act++;
+				state = !state;
+				turn++;
+				next();
+			}
 
-	text(act, 0);
-	next();
+			if (checkHp(playerHp, 1) != 2)
+			{
+				stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name);
+				text(act, 0);
+				next();
+				act++;
+
+				text(act, 0);
+				next();
+			}
+		}
+
+		if (checkHp(playerHp, 1) == 2)
+		{
+			gameOver();
+			next();
+		}
+	}
 }

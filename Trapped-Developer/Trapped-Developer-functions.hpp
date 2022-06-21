@@ -1,15 +1,32 @@
 #include <iostream>
 #include <limits>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string>
+#include <memory>
 using namespace std;
 
-bool state, hit = 0, charge = 0;
-int act, turn, playerHp, enemyHp, playerDmg, enemyDmg;
+bool state;
+int act, turn, playerHp, enemyHp, playerDmg, enemyDmg, turnDmg;
+string func;
 string preRow[3] = { "  __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __",
 					 " |                                                                                         |",
 					 " |__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __|" };
-//(text row preset) cout << "|     |\n";
+struct function
+{
+	function(string name)
+	{
+		function::name = name;
+	}
+	string name;
+	bool b = 0;
+
+}att[20];
+void funcSet()
+{
+	att[0].name = "Hit", att[1].name = "Slash", att[2].name = "Attack", att[3].name = "Bonk", att[4].name = "Swing", att[5].name = "Charge", att[6].name = "Punch";
+	att[7].name = "Kick", att[8].name = "Throw", att[9].name = "Stab", att[10].name = "Slice", att[11].name = "Cut", att[12].name = "Zandatsu", att[13].name = "Whip";
+	att[14].name = "Explosion", att[15].name = "Push", att[16].name = "Thurst", att[17].name = "Spin", att[18].name = "Bolognese", att[19].name = "Slam";
+}
 struct weapon
 {
 	weapon(int dmg, string name)
@@ -19,7 +36,7 @@ struct weapon
 	}
 	int dmg;
 	string name;
-}stick(5, "Stick"), sword(15, "Cutting edge Sword"), spear(10, "Spaghetti Spear"), shield(7, "Salvaged Shield");;
+}stick(5, "Stick"), sword(12, "Cutting edge Sword"), spear(10, "Spaghetti Spear"), shield(7, "Salvaged Shield");;
 struct enemy
 {
 	enemy(int hp, string name)
@@ -337,62 +354,244 @@ int checkHp(int player, int enemyhp)
 	}
 }
 
-int checkFunc(string func)
+bool andIf(int actFunc)
 {
-	if (func == "Hit" || func == "Slash")
+	if ((state && act == actFunc) || state == 0)
 	{
-		return hit;
-	}
-	else if (func == "Charge")
-	{
-		return charge;
+		return 1;
 	}
 	else
 	{
-		return 2;
+		return 0;
 	}
 }
 
-int funcExe(string func)
+int checkFunc(string funcMain)
 {
-	if (func == "Hit" || func == "Slash")
+	for (int i = 0; i < 20; i++)
 	{
-		if (state)
+		if (att[i].name == funcMain)
 		{
-			hit++;
-			return playerDmg;			
+			return att[i].b;
+			break;
 		}
-		else
+		else if (i == 19)
 		{
-			return enemyDmg;
-		}		
-	}
-	else if (func == "Charge")
-	{
-		if (state)
-		{
-			return 9;
-			charge++;
-		}
-		else
-		{
-			return 9;
+			return 2;
 		}
 	}
 }
-int attack(bool stateMain, string func, int playerHpMain, int enemyHpMain, int playerDmgMain, int enemyDmgMain)
+int funcExe()
+{
+	int bonusDmg = 0;
+	int entityDmg = 0;
+	if (state)
+	{
+		entityDmg = playerDmg;
+	}
+	else
+	{
+		entityDmg = enemyDmg;
+	}
+
+	if (func == "Hit" || func == "Slash" || func == "Attack" || func == "Bonk" || func == "Swing")
+	{
+		if (state && func == "Hit")
+		{
+			att[0].b++;
+		}
+		else if (state && func == "Slash")
+		{
+			att[1].b++;
+		}
+		else if (state && func == "Attack")
+		{
+			att[2].b++;
+		}
+		else if (state && func == "Bonk")
+		{
+			att[3].b++;
+		}
+		else if (state && func == "Swing")
+		{
+			att[4].b++;
+		}
+		turnDmg = entityDmg;
+	}
+	else if (func == "Charge" || func == "Punch")
+	{
+		if (state && func == "Charge")
+		{
+			att[5].b++;
+		}
+		else if (state && func == "Punch")
+		{
+			att[6].b++;
+		}
+		turnDmg = 8;
+	}
+	else if (func == "Kick")
+	{
+		if (state)
+		{
+			att[7].b++;
+		}
+		turnDmg = 9;
+	}
+	else if (func == "Throw" && (andIf(1) || andIf(4)))
+	{
+		if (state)
+		{
+			att[8].b++;
+		}
+		turnDmg = 2 * entityDmg;
+	}
+	else if (func == "Stab" && (andIf(1) || andIf(2) || andIf(3) || playerDmg == 10))
+	{		
+		if (andIf(1))
+		{
+			bonusDmg = 2;
+		}
+		else if (playerDmg == 15 || enemyDmg == 15)
+		{
+			bonusDmg = -5;
+		}
+		else if (playerDmg == 10 || enemyDmg == 10)
+		{
+			bonusDmg = 5;
+		}
+
+		if (state)
+		{
+			att[9].b++;
+		}
+		turnDmg = entityDmg + bonusDmg;
+	}
+	else if ((func == "Slice" || func == "Cut") && (andIf(2) || andIf(3)))
+	{
+		if (state && func == "Slice")
+		{
+			att[10].b++;
+		}
+		else if (state && func == "Cut")
+		{
+			att[11].b++;
+		}
+		turnDmg = entityDmg + 2;
+	}
+	else if (func == "Zandatsu" && (andIf(2) || andIf(3)))
+	{
+		turnDmg = 100;
+	}
+	else if (func == "Whip" && (playerDmg == 10 || enemyDmg == 10))
+	{
+		if (state)
+		{
+			att[13].b++;
+		}
+		turnDmg = entityDmg + 7;
+	}
+	else if ((func == "I am fucking invincible" || func == "I'm fucking invincible") && playerDmg == 7)
+	{
+		turnDmg = 100;
+	}
+	else if ((func == "Push" || func == "Thrust") && (playerDmg == 7 || enemyDmg == 7))
+	{
+		if (state && func == "Push")
+		{
+			att[15].b++;
+		}
+		else if (state && func == "Thrust")
+		{
+			att[16].b++;
+		}
+		turnDmg = entityDmg * 2;
+	}
+	else if ((func == "Spin" || func == "Spin Attack") && (playerDmg == 15 || enemyDmg == 15))
+	{
+		if (state)
+		{
+			att[17].b++;
+		}
+		turnDmg = entityDmg * 2;
+	}
+	else if (func == "Spaghetti Bolognese" && playerDmg == 10)
+	{
+		if (state)
+		{
+			att[18].b++;
+		}
+		turnDmg = 100;
+	}
+	else if (func == "Slam" && (playerDmg == 7 || enemyDmg == 7))
+	{
+		if (state)
+		{
+			att[19].b++;
+		}
+		turnDmg = 100;
+	}
+
+	return turnDmg;
+}
+int enemyAttack()
+{
+	switch (act)
+	{
+	case 1:
+		switch (turn)
+		{
+		case 1:
+			func = "Hit";
+			return funcExe();
+			break;
+		}
+	}
+}
+int damage(bool stateMain, string funcMain, int playerHpMain, int enemyHpMain, int playerDmgMain, int enemyDmgMain, int actMain, int turnMain)
 {
 	state = stateMain;
+	func = funcMain;
 	playerDmg = playerDmgMain;
 	enemyDmg = enemyDmgMain;
 	playerHp = playerHpMain;
 	enemyHp = enemyHpMain;
+	act = actMain;
+	turn = turnMain;
+
 	if (state)
 	{
-		return enemyHp - funcExe(func); //= enemyHp - funcExe(playerDmg + enemyHp) = -playerDmg
+		return enemyHp - funcExe();
 	}
 	else
 	{
-		return playerHp - funcExe("Hit");
+		return playerHp - enemyAttack();
 	}
+}
+void type()
+{
+	cout << "\n *type a function to attack, start each word (if multiple) with a capital letter* \n ";
+}
+void wrongFunc(string funcName)
+{
+	if (checkFunc(funcName) == 2)
+	{
+		cout << " This is an illogical function! I have to type a logical one. ";
+	}
+	else if (checkFunc(funcName) == 1)
+	{
+		cout << " I have already used this function and I can't use it again! I have to think of another function.\n  *some functions have more than one name* ";
+	}
+}
+
+void funcThrow()
+{
+
+}
+
+void gameOver()
+{
+	cout << preRow[0] << endl << preRow[1] << endl << preRow[1] << endl;
+	cout << " |                                        GAME OVER                                        |\n";
+	cout << preRow[1] << endl << preRow[2] << endl;
 }
