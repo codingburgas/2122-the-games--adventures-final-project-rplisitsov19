@@ -2,7 +2,6 @@
 #include <limits>
 #include <cstdlib>
 #include <string>
-#include <memory>
 using namespace std;
 
 bool state;
@@ -11,15 +10,11 @@ string func;
 string preRow[3] = { "  __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __",
 					 " |                                                                                         |",
 					 " |__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __|" };
+
 struct function
 {
-	function(string name)
-	{
-		function::name = name;
-	}
 	string name;
 	bool b = 0;
-
 }att[20];
 void funcSet()
 {
@@ -27,6 +22,7 @@ void funcSet()
 	att[7].name = "Kick", att[8].name = "Throw", att[9].name = "Stab", att[10].name = "Slice", att[11].name = "Cut", att[12].name = "Zandatsu", att[13].name = "Whip";
 	att[14].name = "Explosion", att[15].name = "Push", att[16].name = "Thurst", att[17].name = "Spin", att[18].name = "Bolognese", att[19].name = "Slam";
 }
+
 struct weapon
 {
 	weapon(int dmg, string name)
@@ -428,7 +424,7 @@ int funcExe()
 		{
 			att[6].b++;
 		}
-		turnDmg = 8;
+		turnDmg = 9;
 	}
 	else if (func == "Kick")
 	{
@@ -436,7 +432,7 @@ int funcExe()
 		{
 			att[7].b++;
 		}
-		turnDmg = 9;
+		turnDmg = 10;
 	}
 	else if (func == "Throw" && (andIf(1) || andIf(4)))
 	{
@@ -529,7 +525,7 @@ int funcExe()
 		{
 			att[19].b++;
 		}
-		turnDmg = 100;
+		turnDmg = entityDmg + 4;
 	}
 
 	return turnDmg;
@@ -543,6 +539,62 @@ int enemyAttack()
 		{
 		case 1:
 			func = "Hit";
+			return funcExe();
+			break;
+		case 2:
+			func = "Slash";
+			return funcExe();
+			break;
+		case 3:
+			func = "Cut";
+			return funcExe();
+			break;
+		}
+	case 2:
+		switch (turn)
+		{
+		case 1:
+			func = "Slash";
+			return funcExe();
+			break;
+		case 2:
+			func = "Slam";
+			return funcExe();
+			break;
+		case 3:
+			func = "Slam";
+			return funcExe();
+			break;
+		}
+	case 3:
+		switch (turn)
+		{
+		case 1:
+			func = "Slash";
+			return funcExe();
+			break;
+		case 2:
+			func = "Stab";
+			return funcExe();
+			break;
+		case 3:
+			func = "Stab";
+			return funcExe();
+			break;
+		}
+	case 4:
+		switch (turn)
+		{
+		case 1:
+			func = "Punch";
+			return funcExe();
+			break;
+		case 2:
+			func = "Kick";
+			return funcExe();
+			break;
+		case 3:
+			func = "Bonk";
 			return funcExe();
 			break;
 		}
@@ -568,6 +620,7 @@ int damage(bool stateMain, string funcMain, int playerHpMain, int enemyHpMain, i
 		return playerHp - enemyAttack();
 	}
 }
+
 void type()
 {
 	cout << "\n *type a function to attack, start each word (if multiple) with a capital letter* \n ";
