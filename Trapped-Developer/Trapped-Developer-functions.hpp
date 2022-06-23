@@ -6,7 +6,7 @@ using namespace std;
 
 bool state;
 int act, turn, playerHp, enemyHp, playerDmg, enemyDmg, turnDmg;
-string func = "", enemyN = "";
+string func = "", enemyN = "", rowAttack;
 string preRow[3] = { "  __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __",
 					 " |                                                                                         |",
 					 " |__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __|" };
@@ -237,10 +237,10 @@ string empty()
 {
 	return "\n\n\n\n\n\n";
 }
-string spaceFunc(string row)
+string spaceFunc()
 {
 	string output;
-	for (int i = 0; i < size(preRow[1]) - size(row) - 1; i++)
+	for (int i = 0; i < size(preRow[1]) - size(rowAttack) - 1; i++)
 	{
 		output += " ";
 	}
@@ -260,20 +260,19 @@ string textAttack()
 
 	if (turn % 2 == 0)
 	{
-		part = " |  Dev used '";
+		part = " | DEV USED '";
 	}
 	else
 	{
-		part = " |  The enemy used '";
+		part = " | THE ENEMY USED '";
 	}
-	string row = part + func + "' for " + dmgText + " damage.";
-	return row + spaceFunc(row);
+	rowAttack = part + func + "' FOR " + dmgText + " DAMAGE.";
+	return rowAttack + spaceFunc();
 }
 void text(int actMain, int turnMain)
 {
 	act = actMain;
 	turn = turnMain;
-	string row;
 
 	if (turn == 0)
 	{
@@ -287,7 +286,7 @@ void text(int actMain, int turnMain)
 		cout << " |     Why is it in this font? This is very weird. The last thing I remember is...         |\n";
 		cout << " |     *scratces head* falling asleep in front of my computer screen. I must've gotten     |\n";
 		cout << " |     tired after all that programming. And what is this thing stuck on my belt?          |\n";
-		cout << " |                          CONGRATULATIONS! YOU FOUND A 'Stick'!                          |\n";
+		cout << " | CONGRATULATIONS! YOU FOUND A 'Stick'!                                                   |\n";
 		cout << " |  Dev: Wait a minute. That's like the first weapon in the game I'm making. And the name  |\n";
 		cout << " |     infront of everything I say is 'Dev'. Is that short for 'Developer'? Am I in my     |\n";
 		cout << " |     own game!? Does that mean I will have to fight against...                           |\n";
@@ -303,14 +302,25 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			row = " |  Dev: Take this!";
-			cout << row << spaceFunc(row) << textAttack();
+			cout << rowAttack << spaceFunc() << textAttack();
 		}
 		else
 		{
-			row = " |  work in progress";
-			cout << row << spaceFunc(row) << textAttack();
+			switch (turn / 2)
+			{
+			case 1:
+				rowAttack = " |  Saber Wolf: I will show you what superior intelligence can do!";
+				break;
+			case 2:
+				rowAttack = " |  Saber Wolf: Someone on your intelligence level can never do anything to me!";
+				break;
+			case 3:
+				rowAttack = " |  Saber Wolf: This is it for you, monkey!";
+				break;
+			}
+			cout << rowAttack << spaceFunc() << textAttack();
 		}
+		break;
 	case 2:
 		if (turn == 10)
 		{
@@ -322,13 +332,25 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			row = " |  Dev: Take this!";
-			cout << row << spaceFunc(row) << textAttack;
+			cout << rowAttack << spaceFunc() << textAttack;
 		}
 		else
 		{
-			cout << row << spaceFunc(row) << textAttack;
+			switch (turn / 2)
+			{
+			case 1:
+				rowAttack = " |  ";
+				break;
+			case 2:
+				rowAttack = " |  ";
+				break;
+			case 3:
+				rowAttack = " |  ";
+				break;
+			}
+			cout << rowAttack << spaceFunc() << textAttack;
 		}
+		break;
 	case 3:
 		if (turn == 10)
 		{
@@ -340,13 +362,25 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			row = " |  Dev: Take this!";
-			cout << row << spaceFunc(row) << textAttack;
+			cout << rowAttack << spaceFunc() << textAttack;
 		}
 		else
 		{
-			cout << row << spaceFunc(row) << textAttack;
+			switch (turn / 2)
+			{
+			case 1:
+				rowAttack = " |  ";
+				break;
+			case 2:
+				rowAttack = " |  ";
+				break;
+			case 3:
+				rowAttack = " |  ";
+				break;
+			}
+			cout << rowAttack << spaceFunc() << textAttack;
 		}
+		break;
 	case 4:
 		if (turn == 10)
 		{
@@ -358,13 +392,25 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			row = " |  Dev: Take this!";
-			cout << row << spaceFunc(row) << textAttack;
+			cout << rowAttack << spaceFunc() << textAttack;
 		}
 		else
 		{
-			cout << row << spaceFunc(row) << textAttack;
+			switch (turn / 2)
+			{
+			case 1:
+				rowAttack = " |  ";
+				break;
+			case 2:
+				rowAttack = " |  ";
+				break;
+			case 3:
+				rowAttack = " |  ";
+				break;
+			}
+			cout << rowAttack << spaceFunc() << textAttack;
 		}
+		break;
 	case 5:
 		//epilogue
 		break;
@@ -450,6 +496,7 @@ int funcExe()
 		{
 			att[4].b++;
 		}
+		rowAttack = " |  Dev: Take this!";
 		turnDmg = entityDmg;
 	}
 	else if (func == "Charge" || func == "Punch")
@@ -462,6 +509,7 @@ int funcExe()
 		{
 			att[6].b++;
 		}
+		rowAttack = " |  Dev: I don't want to hurt you!";
 		turnDmg = 9;
 	}
 	else if (func == "Kick")
@@ -469,7 +517,8 @@ int funcExe()
 		if (state)
 		{
 			att[7].b++;
-		}
+			rowAttack = " |  Dev: *kiai*";
+		}		
 		turnDmg = 10;
 	}
 	else if (func == "Throw" && (andIf(1) || andIf(4)))
@@ -477,6 +526,7 @@ int funcExe()
 		if (state)
 		{
 			att[8].b++;
+			rowAttack = " |  Dev: Snipe!";
 		}
 		turnDmg = 2 * entityDmg;
 	}
@@ -498,6 +548,7 @@ int funcExe()
 		if (state)
 		{
 			att[9].b++;
+			rowAttack = " |  Dev: *poke*";
 		}
 		turnDmg = entityDmg + bonusDmg;
 	}
@@ -511,10 +562,12 @@ int funcExe()
 		{
 			att[11].b++;
 		}
+		rowAttack = " |  Dev: Slice and dice!";
 		turnDmg = entityDmg + 2;
 	}
 	else if (func == "Zandatsu" && (andIf(2) || andIf(3)))
 	{
+		rowAttack = " |  Dev: I think it's time for Jack to let 'er rip!";
 		turnDmg = 100;
 	}
 	else if (func == "Whip" && (playerDmg == 10 || enemyDmg == 10))
@@ -522,11 +575,14 @@ int funcExe()
 		if (state)
 		{
 			att[13].b++;
+			rowAttack = " |  Dev: Die!";
 		}
 		turnDmg = entityDmg + 7;
 	}
 	else if ((func == "I am fucking invincible" || func == "I'm fucking invincible") && playerDmg == 7)
 	{
+		func = "Explosion";
+		rowAttack = " |  Dev: I'm fucking invincible!";
 		turnDmg = 100;
 	}
 	else if ((func == "Push" || func == "Thrust") && (playerDmg == 7 || enemyDmg == 7))
@@ -539,6 +595,7 @@ int funcExe()
 		{
 			att[16].b++;
 		}
+		rowAttack = " |  Dev: Dodge this!";
 		turnDmg = entityDmg * 2;
 	}
 	else if ((func == "Spin" || func == "Spin Attack") && (playerDmg == 15 || enemyDmg == 15))
@@ -546,6 +603,7 @@ int funcExe()
 		if (state)
 		{
 			att[17].b++;
+			rowAttack = " |  Dev: Beyblade time!";
 		}
 		turnDmg = entityDmg * 2;
 	}
@@ -554,6 +612,7 @@ int funcExe()
 		if (state)
 		{
 			att[18].b++;
+			rowAttack = " |  Dev: I'm going to turn you into human spaghetti bolognese!";
 		}
 		turnDmg = 100;
 	}
@@ -562,6 +621,7 @@ int funcExe()
 		if (state)
 		{
 			att[19].b++;
+			rowAttack = " |  Dev: AoE for the win!";
 		}
 		turnDmg = entityDmg + 4;
 	}
