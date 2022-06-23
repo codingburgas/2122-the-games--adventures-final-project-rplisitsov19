@@ -149,15 +149,7 @@ int main()
 				}
 				else
 				{
-					if (funcName == "Throw")
-					{
-						funcThrow();
-						playerHp = 0;
-					}
-					else
-					{
-						playerHp = damage(0, funcName, playerHp, prez.hp, wpnDmg, prez.dmg, act, turn, prez.name);
-					}
+					playerHp = damage(0, funcName, playerHp, prez.hp, wpnDmg, prez.dmg, act, turn, prez.name);					
 				}
 				state = !state;
 				turn++;

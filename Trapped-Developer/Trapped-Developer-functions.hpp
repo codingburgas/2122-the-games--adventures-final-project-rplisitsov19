@@ -282,10 +282,11 @@ void text(int actMain, int turnMain)
 	switch (act)
 	{
 	case 0:
-		cout << " |  Dev: *yawns* Where am I? It's so dark in here. Hey I can see what I'm saying as text.  |\n";
-		cout << " |     Why is it in this font? This is very weird. The last thing I remember is...         |\n";
-		cout << " |     *scratces head* falling asleep in front of my computer screen. I must've gotten     |\n";
-		cout << " |     tired after all that programming. And what is this thing stuck on my belt?          |\n";
+		cout << " |  Dev: *yawns* Where am I? It seems I am on some kind of rope bridge Hey I can see what  |\n";
+		cout << " |     I'm saying as text. Why is it in this font? This is very weird. The last thing      |\n";
+		cout << " |     I remember is... *scratces head* falling asleep in front of my computer screen.     |\n";
+		cout << " |     I must've gotten tired after all that programming. And what is this thing stuck     |\n";
+		cout << " |     to my belt?                                                                         |\n";
 		cout << " | CONGRATULATIONS! YOU FOUND A 'Stick'!                                                   |\n";
 		cout << " |  Dev: Wait a minute. That's like the first weapon in the game I'm making. And the name  |\n";
 		cout << " |     infront of everything I say is 'Dev'. Is that short for 'Developer'? Am I in my     |\n";
@@ -339,13 +340,13 @@ void text(int actMain, int turnMain)
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  ";
+				rowAttack = " |  This world and all its living people are memes, something you won't be soon!";
 				break;
 			case 2:
-				rowAttack = " |  ";
+				rowAttack = " |  Free will is the ability to create memes, so take this meme to your grave!";
 				break;
 			case 3:
-				rowAttack = " |  ";
+				rowAttack = " |  Too bad you'll die before passing down any memes.";
 				break;
 			}
 			cout << rowAttack << spaceFunc() << textAttack;
@@ -369,13 +370,13 @@ void text(int actMain, int turnMain)
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  ";
+				rowAttack = " |  Come, le mec!";
 				break;
 			case 2:
-				rowAttack = " |  ";
+				rowAttack = " |  I will tear you apart!";
 				break;
 			case 3:
-				rowAttack = " |  ";
+				rowAttack = " |  Good night!";
 				break;
 			}
 			cout << rowAttack << spaceFunc() << textAttack;
@@ -399,13 +400,13 @@ void text(int actMain, int turnMain)
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  ";
+				rowAttack = " |  Played college ball, ya know";
 				break;
 			case 2:
-				rowAttack = " |  ";
+				rowAttack = " |  Don't mess with this president!";
 				break;
 			case 3:
-				rowAttack = " |  ";
+				rowAttack = " |  Taste the power of nanomachines!";
 				break;
 			}
 			cout << rowAttack << spaceFunc() << textAttack;
