@@ -6,7 +6,7 @@ using namespace std;
 
 bool state;
 int act, turn, playerHp, enemyHp, playerDmg, enemyDmg, turnDmg;
-string func = "", enemyN = "", rowAttack;
+string func = "", enemyN = "", rowAttack = "";
 string preRow[3] = { "  __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __",
 					 " |                                                                                         |",
 					 " |__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __|" };
@@ -237,17 +237,17 @@ string empty()
 {
 	return "\n\n\n\n\n\n";
 }
-string spaceFunc()
+string spaceFunc(string textRow)
 {
 	string output;
-	for (int i = 0; i < size(preRow[1]) - size(rowAttack) - 1; i++)
+	for (int i = 0; i < size(preRow[1]) - size(textRow) - 1; i++)
 	{
 		output += " ";
 	}
 	output += "|\n";
 	return output;
 }
-string textAttack()
+string textAttack(string textRow)
 {
 	string dmgText(1, char(turnDmg) + 48);
 	string part;
@@ -266,13 +266,14 @@ string textAttack()
 	{
 		part = " | THE ENEMY USED '";
 	}
-	rowAttack = part + func + "' FOR " + dmgText + " DAMAGE.";
-	return rowAttack + spaceFunc();
+	string newRow = part + func + "' FOR " + dmgText + " DAMAGE.";
+	return newRow + spaceFunc(newRow);
 }
 void text(int actMain, int turnMain)
 {
 	act = actMain;
 	turn = turnMain;
+	string rowAttackEnemy;
 
 	if (turn == 0)
 	{
@@ -303,23 +304,23 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc() << textAttack();
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack(rowAttack);
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  Saber Wolf: I will show you what superior intelligence can do!";
+				rowAttackEnemy = " |  Saber Wolf: I will show you what superior intelligence can do!";
 				break;
 			case 2:
-				rowAttack = " |  Saber Wolf: Someone on your intelligence level can never do anything to me!";
+				rowAttackEnemy = " |  Saber Wolf: Someone on your intelligence level can never do anything to me!";
 				break;
 			case 3:
-				rowAttack = " |  Saber Wolf: This is it for you, monkey!";
+				rowAttackEnemy = " |  Saber Wolf: This is it for you, monkey!";
 				break;
 			}
-			cout << rowAttack << spaceFunc() << textAttack();
+			cout << rowAttackEnemy << spaceFunc(rowAttackEnemy) << textAttack(rowAttackEnemy);
 		}
 		break;
 	case 2:
@@ -333,23 +334,23 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc() << textAttack;
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack(rowAttack);
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  This world and all its living people are memes, something you won't be soon!";
+				rowAttackEnemy = " |  This world and all its living people are memes, something you won't be soon!";
 				break;
 			case 2:
-				rowAttack = " |  Free will is the ability to create memes, so take this meme to your grave!";
+				rowAttackEnemy = " |  Free will is the ability to create memes, so take this meme to your grave!";
 				break;
 			case 3:
-				rowAttack = " |  Too bad you'll die before passing down any memes.";
+				rowAttackEnemy = " |  Too bad you'll die before passing down any memes.";
 				break;
 			}
-			cout << rowAttack << spaceFunc() << textAttack;
+			cout << rowAttackEnemy << spaceFunc(rowAttackEnemy) << textAttack(rowAttackEnemy);
 		}
 		break;
 	case 3:
@@ -363,23 +364,23 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc() << textAttack;
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack(rowAttack);
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  Come, le mec!";
+				rowAttackEnemy = " |  Come, le mec!";
 				break;
 			case 2:
-				rowAttack = " |  I will tear you apart!";
+				rowAttackEnemy = " |  I will tear you apart!";
 				break;
 			case 3:
-				rowAttack = " |  Good night!";
+				rowAttackEnemy = " |  Good night!";
 				break;
 			}
-			cout << rowAttack << spaceFunc() << textAttack;
+			cout << rowAttackEnemy << spaceFunc(rowAttackEnemy) << textAttack(rowAttackEnemy);
 		}
 		break;
 	case 4:
@@ -393,23 +394,23 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc() << textAttack;
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack(rowAttack);
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  Played college ball, ya know";
+				rowAttackEnemy = " |  Played college ball, ya know";
 				break;
 			case 2:
-				rowAttack = " |  Don't mess with this president!";
+				rowAttackEnemy = " |  Don't mess with this president!";
 				break;
 			case 3:
-				rowAttack = " |  Taste the power of nanomachines!";
+				rowAttackEnemy = " |  Taste the power of nanomachines!";
 				break;
 			}
-			cout << rowAttack << spaceFunc() << textAttack;
+			cout << rowAttackEnemy << spaceFunc(rowAttackEnemy) << textAttack(rowAttackEnemy);
 		}
 		break;
 	case 5:
@@ -737,14 +738,12 @@ void wrongFunc(string funcName)
 	}
 }
 
-void funcThrow()
-{
-
-}
-
 void gameOver()
 {
-	cout << empty() << preRow[0] << endl << preRow[1] << endl << preRow[1] << endl;
-	cout << " |                                        GAME OVER                                        |\n";
-	cout << preRow[1] << endl << preRow[2] << endl;
+	cout << empty() << preRow[0] << endl;
+	cout << " |              _____   ___    __  ___   ____       ____   _   __   ____   ___             |\n";
+	cout << " |             / ___/  / _ |  /  |/  /  / __/      / __ \\ | | / /  / __/  / _ \\            |\n";
+	cout << " |            / (_ /  / __ | / /|_/ /  / _/       / /_/ / | |/ /  / _/   / , _/            |\n";
+	cout << " |            \\___/  /_/ |_|/_/  /_/  /___/       \\____/  |___/  /___/  /_/|_|             |\n";
+	cout << preRow[2] << endl;
 }
