@@ -6,7 +6,7 @@ using namespace std;
 
 bool state;
 int act, turn, playerHp, enemyHp, playerDmg, enemyDmg, turnDmg;
-string func;
+string func = "", enemyN = "";
 string preRow[3] = { "  __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __",
 					 " |                                                                                         |",
 					 " |__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __|" };
@@ -36,7 +36,7 @@ struct weapon
 struct enemy
 {
 	enemy(int hp, string name)
-	{		
+	{
 		enemy::hp = hp;
 		enemy::name = name;
 	}
@@ -100,7 +100,7 @@ string playerStats(int hp, string wpn, int dmg, int row) //hp = health points, w
 		}
 		return " | Dev" + space1 + "|";
 		break;
-	case 2:	
+	case 2:
 		if (hp > 9)
 		{
 			sp2Len--;
@@ -111,7 +111,7 @@ string playerStats(int hp, string wpn, int dmg, int row) //hp = health points, w
 		{
 			space2 += ' ';
 		}
-		return " |  Health: " + hpText + "HP"+ space2 + "|";
+		return " |  Health: " + hpText + "HP" + space2 + "|";
 		break;
 	case 3:
 		if (dmg > 9)
@@ -215,7 +215,8 @@ void stats(int playerhp, int wpnDmg, string wpnName, int enemyhp, int enemydmg, 
 {
 	int rowLen1 = size(playerStats(playerhp, wpnName, wpnDmg, 3));
 	int rowLen2 = size(enemyStats(enemyhp, enemyName, enemydmg, 3));
-	int gapSpace = size(preRow[1]) - (rowLen1 + rowLen2);
+	int rowLen = rowLen1 + rowLen2;
+	int gapSpace = size(preRow[1]) - rowLen;
 	rowLen1 -= 3;
 	rowLen2 -= 2;
 	string gap = "";
@@ -232,11 +233,52 @@ void stats(int playerhp, int wpnDmg, string wpnName, int enemyhp, int enemydmg, 
 	cout << preRowFunc(2, rowLen1, '_', 1) << gap << preRowFunc(2, rowLen2, '_', 0) << endl;
 }
 
+string empty()
+{
+	return "\n\n\n\n\n\n";
+}
+string spaceFunc(string row)
+{
+	string output;
+	for (int i = 0; i < size(preRow[1]) - size(row) - 1; i++)
+	{
+		output += " ";
+	}
+	output += "|\n";
+	return output;
+}
+string textAttack()
+{
+	string dmgText(1, char(turnDmg) + 48);
+	string part;
+
+	if (turnDmg > 9)
+	{
+		string dmg1(1, char(turnDmg % 10) + 48), dmg2(1, char(floor(turnDmg / 10) + 48));
+		dmgText = dmg2 + dmg1;
+	}
+
+	if (turn % 2 == 0)
+	{
+		part = " |  Dev used '";
+	}
+	else
+	{
+		part = " |  The enemy used '";
+	}
+	string row = part + func + "' for " + dmgText + " damage.";
+	return row + spaceFunc(row);
+}
 void text(int actMain, int turnMain)
 {
 	act = actMain;
 	turn = turnMain;
+	string row;
 
+	if (turn == 0)
+	{
+		cout << empty();
+	}
 	cout << preRow[0] << endl << preRow[1] << endl;
 	switch (act)
 	{
@@ -251,81 +293,77 @@ void text(int actMain, int turnMain)
 		cout << " |     own game!? Does that mean I will have to fight against...                           |\n";
 		break;
 	case 1:
-		switch (turn)
+		if (turn == 10)
 		{
-		case 0:
 			//finishing blow, you managed to defeat the enemy
-			break;
-
-		case 1:
+		}
+		else if (turn == 1)
+		{
 			//oh no it's a monster you have to attack
-			break;
-
-		case 2:
-
-			break;
-
-		default:
-
-			break;
+		}
+		else if (turn % 2 == 0)
+		{
+			row = " |  Dev: Take this!";
+			cout << row << spaceFunc(row) << textAttack();
+		}
+		else
+		{
+			row = " |  work in progress";
+			cout << row << spaceFunc(row) << textAttack();
 		}
 	case 2:
-
-		switch (turn)
+		if (turn == 10)
 		{
-		case 0:
 			//finishing blow, you managed to defeat the enemy
-			break;
-
-		case 1:
+		}
+		else if (turn == 1)
+		{
 			//oh no it's a monster you have to attack
-			break;
-
-		case 2:
-
-			break;
-
-		default:
-
-			break;
+		}
+		else if (turn % 2 == 0)
+		{
+			row = " |  Dev: Take this!";
+			cout << row << spaceFunc(row) << textAttack;
+		}
+		else
+		{
+			cout << row << spaceFunc(row) << textAttack;
 		}
 	case 3:
-		switch (turn)
+		if (turn == 10)
 		{
-		case 0:
 			//finishing blow, you managed to defeat the enemy
-			break;
-
-		case 1:
+		}
+		else if (turn == 1)
+		{
 			//oh no it's a monster you have to attack
-			break;
-
-		case 2:
-
-			break;
-
-		default:
-
-			break;
+		}
+		else if (turn % 2 == 0)
+		{
+			row = " |  Dev: Take this!";
+			cout << row << spaceFunc(row) << textAttack;
+		}
+		else
+		{
+			cout << row << spaceFunc(row) << textAttack;
 		}
 	case 4:
-		switch (turn)
+		if (turn == 10)
 		{
-		case 0:
 			//finishing blow, you managed to defeat the enemy
-			break;
-
-		case 1:
+		}
+		else if (turn == 1)
+		{
 			//oh no it's a monster you have to attack
-			break;
-
-		case 2:
-
-			break;
-
-		default:
-
-			break;
+		}
+		else if (turn % 2 == 0)
+		{
+			row = " |  Dev: Take this!";
+			cout << row << spaceFunc(row) << textAttack;
+		}
+		else
+		{
+			cout << row << spaceFunc(row) << textAttack;
 		}
 	case 5:
 		//epilogue
@@ -443,7 +481,7 @@ int funcExe()
 		turnDmg = 2 * entityDmg;
 	}
 	else if (func == "Stab" && (andIf(1) || andIf(2) || andIf(3) || playerDmg == 10))
-	{		
+	{
 		if (andIf(1))
 		{
 			bonusDmg = 2;
@@ -600,7 +638,7 @@ int enemyAttack()
 		}
 	}
 }
-int damage(bool stateMain, string funcMain, int playerHpMain, int enemyHpMain, int playerDmgMain, int enemyDmgMain, int actMain, int turnMain)
+int damage(bool stateMain, string funcMain, int playerHpMain, int enemyHpMain, int playerDmgMain, int enemyDmgMain, int actMain, int turnMain, string enemyNameMain)
 {
 	state = stateMain;
 	func = funcMain;
@@ -610,6 +648,7 @@ int damage(bool stateMain, string funcMain, int playerHpMain, int enemyHpMain, i
 	enemyHp = enemyHpMain;
 	act = actMain;
 	turn = turnMain;
+	enemyN = enemyNameMain;
 
 	if (state)
 	{
@@ -644,7 +683,7 @@ void funcThrow()
 
 void gameOver()
 {
-	cout << preRow[0] << endl << preRow[1] << endl << preRow[1] << endl;
+	cout << empty() << preRow[0] << endl << preRow[1] << endl << preRow[1] << endl;
 	cout << " |                                        GAME OVER                                        |\n";
 	cout << preRow[1] << endl << preRow[2] << endl;
 }

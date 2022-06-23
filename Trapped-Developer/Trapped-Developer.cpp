@@ -16,7 +16,7 @@ int main()
 	while (true)
 	{
 		cin >> game;
-		next();		
+		next();
 
 		text(act, 0); //0 = not in battle
 		act++;
@@ -34,11 +34,11 @@ int main()
 					wrongFunc(funcName);
 				} while (checkFunc(funcName) > 0);
 				system("CLS");
-				wolf.hp = damage(1, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg, act, turn);
+				wolf.hp = damage(1, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg, act, turn, wolf.name);
 			}
 			else
 			{
-				playerHp = damage(0, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg, act, turn);
+				playerHp = damage(0, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg, act, turn, wolf.name);
 			}
 			state = !state;
 			turn++;
@@ -48,7 +48,7 @@ int main()
 		if (checkHp(playerHp, 1) != 2)
 		{
 			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name);
-			text(act, 0);
+			text(act, 10);
 			next();
 			turn = 1;
 			state = 1;
@@ -70,11 +70,11 @@ int main()
 							wrongFunc(funcName);
 						} while (checkFunc(funcName) > 0);
 						system("CLS");
-						muson.hp = damage(1, funcName, playerHp, muson.hp, sword.dmg, muson.dmg, act, turn);
+						muson.hp = damage(1, funcName, playerHp, muson.hp, sword.dmg, muson.dmg, act, turn, muson.name);
 					}
 					else
 					{
-						playerHp = damage(0, funcName, playerHp, muson.hp, sword.dmg, muson.dmg, act, turn);
+						playerHp = damage(0, funcName, playerHp, muson.hp, sword.dmg, muson.dmg, act, turn, muson.name);
 					}
 					state = !state;
 					turn++;
@@ -84,7 +84,7 @@ int main()
 				if (checkHp(playerHp, 1) != 2)
 				{
 					stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name);
-					text(act, 0);
+					text(act, 10);
 					next();
 					wpnDmg = shield.dmg;
 					wpnName = shield.name;
@@ -105,11 +105,11 @@ int main()
 							wrongFunc(funcName);
 						} while (checkFunc(funcName) > 0);
 						system("CLS");
-						vent.hp = damage(1, funcName, playerHp, vent.hp, sword.dmg, vent.dmg, act, turn);
+						vent.hp = damage(1, funcName, playerHp, vent.hp, sword.dmg, vent.dmg, act, turn, vent.name);
 					}
 					else
 					{
-						playerHp = damage(0, funcName, playerHp, vent.hp, sword.dmg, vent.dmg, act, turn);
+						playerHp = damage(0, funcName, playerHp, vent.hp, sword.dmg, vent.dmg, act, turn, vent.name);
 					}
 					state = !state;
 					turn++;
@@ -119,12 +119,12 @@ int main()
 				if (checkHp(playerHp, 1) != 2)
 				{
 					stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name);
-					text(act, 0);
+					text(act, 10);
 					next();
 					wpnDmg = spear.dmg;
 					wpnName = spear.name;
 				}
-			}			
+			}
 		}
 
 		if (checkHp(playerHp, 1) != 2)
@@ -145,7 +145,7 @@ int main()
 						wrongFunc(funcName);
 					} while (checkFunc(funcName) > 0);
 					system("CLS");
-					prez.hp = damage(1, funcName, playerHp, prez.hp, wpnDmg, prez.dmg, act, turn);
+					prez.hp = damage(1, funcName, playerHp, prez.hp, wpnDmg, prez.dmg, act, turn, prez.name);
 				}
 				else
 				{
@@ -156,8 +156,8 @@ int main()
 					}
 					else
 					{
-						playerHp = damage(0, funcName, playerHp, prez.hp, wpnDmg, prez.dmg, act, turn);
-					}					
+						playerHp = damage(0, funcName, playerHp, prez.hp, wpnDmg, prez.dmg, act, turn, prez.name);
+					}
 				}
 				state = !state;
 				turn++;
@@ -167,7 +167,7 @@ int main()
 			if (checkHp(playerHp, 1) != 2)
 			{
 				stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name);
-				text(act, 0);
+				text(act, 10);
 				next();
 				act++;
 
