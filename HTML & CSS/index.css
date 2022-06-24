@@ -73,21 +73,15 @@ button:hover{
 h1{
     color: white;
     margin: 20px 0px 20px;
-    font-size: 75px;
+    font-size: 50px;
 }
 
 
-
-h3{
-    color: white;
-    font-size: 25px;
-    margin-bottom: 50px;
-}
 
 h4{
     color: #fcfcfc;
     letter-spacing: 2px;
-    font-size: 20px;
+    font-size: 40px;
 }
 
 .newslatter form{
@@ -108,11 +102,12 @@ h4{
 .newslatter form input:last-child{
     position: absolute;
     display: inline-block;
-    outline: none;
+    outline: indianred;
     border: none;
-    padding: 10px 30px;
-    border-radius: 30px;
+    padding: 16px 50px;
+    border-radius: 70px;
     background-color: #f9004d;
     color: white;
+    box-shadow: 0 0 5px #000, 0 0 5px grey;
     
 }
