@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	int game;
+	bool game;
 	int playerHp = 25, wpnDmg;
 	int act = 0, turn = 1;
 	bool state = 1, choice;
@@ -15,7 +15,11 @@ int main()
 
 	while (true)
 	{
+		trappedDev();
 		cin >> game;
+		next();
+
+		rustGear();
 		next();
 
 		text(act, 0);
