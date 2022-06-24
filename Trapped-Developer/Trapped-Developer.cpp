@@ -18,7 +18,7 @@ int main()
 		cin >> game;
 		next();
 
-		text(act, 0); //0 = not in battle
+		text(act, 0);
 		act++;
 		next();
 
@@ -170,6 +170,9 @@ int main()
 
 		if (checkHp(playerHp, 1) == 2)
 		{
+			text(act, 0); //the enemy defeats the player
+			next();
+
 			gameOver();
 			next();
 		}

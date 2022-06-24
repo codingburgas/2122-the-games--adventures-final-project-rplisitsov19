@@ -44,7 +44,7 @@ struct enemy
 	string name;
 	string wpn;
 	int dmg;
-}wolf(10, "Saber Wolf"), vent(20, "Vent"), muson(25, "Muson"), prez(30, "The President");
+}wolf(15, "Saber Wolf"), vent(20, "Vent"), muson(25, "Muson"), prez(30, "The President");
 void setEnemyWpn()
 {
 	wolf.wpn = sword.name;
@@ -247,7 +247,7 @@ string spaceFunc(string textRow)
 	output += "|\n";
 	return output;
 }
-string textAttack(string textRow)
+string textAttack()
 {
 	string dmgText(1, char(turnDmg) + 48);
 	string part;
@@ -266,14 +266,13 @@ string textAttack(string textRow)
 	{
 		part = " | THE ENEMY USED '";
 	}
-	string newRow = part + func + "' FOR " + dmgText + " DAMAGE.";
-	return newRow + spaceFunc(newRow);
+	part = part + func + "' FOR " + dmgText + " DAMAGE.";
+	return part + spaceFunc(part);
 }
 void text(int actMain, int turnMain)
 {
 	act = actMain;
 	turn = turnMain;
-	string rowAttackEnemy;
 
 	if (turn == 0)
 	{
@@ -294,9 +293,13 @@ void text(int actMain, int turnMain)
 		cout << " |     own game!? Does that mean I will have to fight against...                           |\n";
 		break;
 	case 1:
-		if (turn == 10)
+		if (turn == 0)
 		{
-			//finishing blow, you managed to defeat the enemy
+			//the enemy defeated you + finishing blow
+		}
+		else if (turn == 10)
+		{
+			//you managed to defeat the enemy + finishing blow
 		}
 		else if (turn == 1)
 		{
@@ -304,29 +307,33 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack(rowAttack);
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttackEnemy = " |  Saber Wolf: I will show you what superior intelligence can do!";
+				rowAttack = " |  Saber Wolf: I will show you what superior intelligence can do!";
 				break;
 			case 2:
-				rowAttackEnemy = " |  Saber Wolf: Someone on your intelligence level can never do anything to me!";
+				rowAttack = " |  Saber Wolf: Someone on your intelligence level can never do anything to me!";
 				break;
 			case 3:
-				rowAttackEnemy = " |  Saber Wolf: This is it for you, monkey!";
+				rowAttack = " |  Saber Wolf: This is it for you, monkey!";
 				break;
 			}
-			cout << rowAttackEnemy << spaceFunc(rowAttackEnemy) << textAttack(rowAttackEnemy);
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
 		}
 		break;
 	case 2:
-		if (turn == 10)
+		if (turn == 0)
 		{
-			//finishing blow, you managed to defeat the enemy
+			//the enemy defeated you + finishing blow
+		}
+		else if (turn == 10)
+		{
+			//you managed to defeat the enemy + finishing blow
 		}
 		else if (turn == 1)
 		{
@@ -334,29 +341,33 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack(rowAttack);
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttackEnemy = " |  This world and all its living people are memes, something you won't be soon!";
+				rowAttack = " |  This world and all its living people are memes, something you won't be soon!";
 				break;
 			case 2:
-				rowAttackEnemy = " |  Free will is the ability to create memes, so take this meme to your grave!";
+				rowAttack = " |  Free will is the ability to create memes, so take this meme to your grave!";
 				break;
 			case 3:
-				rowAttackEnemy = " |  Too bad you'll die before passing down any memes.";
+				rowAttack = " |  Too bad you'll die before passing down any memes.";
 				break;
 			}
-			cout << rowAttackEnemy << spaceFunc(rowAttackEnemy) << textAttack(rowAttackEnemy);
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
 		}
 		break;
 	case 3:
-		if (turn == 10)
+		if (turn == 0)
 		{
-			//finishing blow, you managed to defeat the enemy
+			//the enemy defeated you + finishing blow
+		}
+		else if (turn == 10)
+		{
+			//you managed to defeat the enemy + finishing blow
 		}
 		else if (turn == 1)
 		{
@@ -364,29 +375,33 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack(rowAttack);
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttackEnemy = " |  Come, le mec!";
+				rowAttack = " |  Come, le mec!";
 				break;
 			case 2:
-				rowAttackEnemy = " |  I will tear you apart!";
+				rowAttack = " |  I will tear you apart!";
 				break;
 			case 3:
-				rowAttackEnemy = " |  Good night!";
+				rowAttack = " |  Good night!";
 				break;
 			}
-			cout << rowAttackEnemy << spaceFunc(rowAttackEnemy) << textAttack(rowAttackEnemy);
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
 		}
 		break;
 	case 4:
-		if (turn == 10)
+		if (turn == 0)
 		{
-			//finishing blow, you managed to defeat the enemy
+			//the enemy defeated you + finishing blow
+		}
+		else if (turn == 10)
+		{
+			//you managed to defeat the enemy + finishing blow
 		}
 		else if (turn == 1)
 		{
@@ -394,23 +409,23 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack(rowAttack);
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttackEnemy = " |  Played college ball, ya know";
+				rowAttack = " |  Played college ball, ya know";
 				break;
 			case 2:
-				rowAttackEnemy = " |  Don't mess with this president!";
+				rowAttack = " |  Don't mess with this president!";
 				break;
 			case 3:
-				rowAttackEnemy = " |  Taste the power of nanomachines!";
+				rowAttack = " |  Taste the power of nanomachines!";
 				break;
 			}
-			cout << rowAttackEnemy << spaceFunc(rowAttackEnemy) << textAttack(rowAttackEnemy);
+			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
 		}
 		break;
 	case 5:
