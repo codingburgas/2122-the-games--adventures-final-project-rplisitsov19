@@ -44,17 +44,17 @@ struct enemy
 	string name;
 	string wpn;
 	int dmg;
-}wolf(15, "Saber Wolf"), vent(20, "Vent"), muson(25, "Muson"), prez(30, "The President");
+}Wolf(15, "Saber Wolf"), Etrangere(20, "Etrangere"), Memesoon(25, "Memesoon"), Prez(30, "The President");
 void setEnemyWpn()
 {
-	wolf.wpn = sword.name;
-	wolf.dmg = sword.dmg;
-	vent.wpn = spear.name;
-	vent.dmg = spear.dmg;
-	muson.wpn = shield.name;
-	muson.dmg = shield.dmg;
-	prez.wpn = "Nanomachines";
-	prez.dmg = 6;
+	Wolf.wpn = sword.name;
+	Wolf.dmg = sword.dmg;
+	Etrangere.wpn = spear.name;
+	Etrangere.dmg = spear.dmg;
+	Memesoon.wpn = shield.name;
+	Memesoon.dmg = shield.dmg;
+	Prez.wpn = "Nanomachines";
+	Prez.dmg = 6;
 }
 
 void next()
@@ -143,13 +143,13 @@ string enemyStats(int hp, string name, int dmg, int row)
 	{
 		wpn = wolf.wpn;
 	}
-	else if (name == "Vent")
+	else if (name == "Etrangere")
 	{
-		wpn = vent.wpn;
+		wpn = Etrangere.wpn;
 	}
-	else if (name == "Muson")
+	else if (name == "Memesoon")
 	{
-		wpn = muson.wpn;
+		wpn = Memesoon.wpn;
 	}
 	else
 	{
@@ -312,7 +312,7 @@ void text(int actMain, int turnMain)
 	switch (act)
 	{
 	case 0:
-		cout << " | Dev: *yawns* Where am I? It seems I am on some kind of rope bridge Hey I can see what   |\n";
+		cout << " | Dev: *yawns* Where am I? It seems I am on some kind of a rope bridge. Hey I can see what|\n";
 		cout << " |      I'm saying as text. Why is it in this font? This is very weird. The last thing     |\n";
 		cout << " |      I remember is... *scratces head* falling asleep in front of my computer screen.    |\n";
 		cout << " |      I must've gotten tired after all that programming. And what is this thing stuck    |\n";
@@ -327,7 +327,8 @@ void text(int actMain, int turnMain)
 	case 1:
 		if (turn == 0)
 		{
-			//the enemy defeated you + finishing blow
+			textRow = " | Saber Wolf: Typical human, dissapointing.";
+			cout << preRow[1] << endl << textRow << spaceFunc(textRow);
 		}
 		else if (turn == 10)
 		{
@@ -364,7 +365,7 @@ void text(int actMain, int turnMain)
 				textRow = " | Saber Wolf: I will show you what superior intelligence can do!";
 				break;
 			case 2:
-				textRow = " | Exterminate!";
+				textRow = " | Saber Wolf: Exterminate!";
 				break;
 			case 3:
 				textRow = " | Saber Wolf: Someone on your intelligence level can never do anything to me!";
@@ -379,12 +380,16 @@ void text(int actMain, int turnMain)
 	case 2:
 		if (turn == 0)
 		{
-			//the enemy defeated you + finishing blow
+			textRow = " | Memesoon: Too bad you'll die before passing down any memes.";
+			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn == 10)
 		{
 			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
-			//you managed to defeat the enemy + finishing blow
+			textRow = " | Memesoon: At least I passed down my memes to you...";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | Dev: Yeah, yeah, I know, order of the universe and all that.";
+			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn == 1)
 		{
@@ -399,13 +404,13 @@ void text(int actMain, int turnMain)
 			switch (turn / 2)
 			{
 			case 1:
-				textRow = " | This world and all its living people are memes, something you won't be soon!";
+				textRow = " | Memesoon: This world and all its living people are memes, something you won't be soon!";
 				break;
 			case 2:
-				textRow = " | Free will is the ability to create memes, so take this meme to your grave!";
+				textRow = " | Memesoon: Free will is the ability to create memes, so take this meme to your grave!";
 				break;
 			case 3:
-				textRow = " | Too bad you'll die before passing down any memes.";
+				textRow = " | Memesoon: ";
 				break;
 			}
 			cout << textRow << spaceFunc(textRow) << textAttack();
@@ -791,6 +796,9 @@ int newHp(string funcMain)
 
 void choose()
 {
+	textRow = " | Dev: Damn, I didn't know I had made him this hard. I have to balance him later.";
+	cout << textRow << spaceFunc(textRow);
+	textRow = " |      ";
 	cout << "\n *type 0 or 1, depending on which path you want to take. 0 for left and 1 for right.*\n ";
 }
 void type()
@@ -801,11 +809,11 @@ void wrongFunc(string funcName)
 {
 	if (checkFunc(funcName) == 2)
 	{
-		cout << "\n This is an illogical function! I have to type a logical one. \n";
+		cout << "\n This is an illogical function! I have to type a logical one.\n ";
 	}
 	else if (checkFunc(funcName) == 1)
 	{
-		cout << "\n I have already used this function and I can't use it again! I have to think of another function.\n  *some functions have more than one name* \n";
+		cout << "\n I have already used this function and I can't use it again! I have to think of another function.\n  *some functions have more than one name*\n ";
 	}
 }
 
