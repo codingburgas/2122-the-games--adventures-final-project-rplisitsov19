@@ -51,6 +51,10 @@ int main()
 
 		if (checkHp(playerHp, 1) != 2)
 		{
+			if (!game)
+			{
+				playerHp = 25;
+			}
 			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name);
 			text(act, 10);
 			turn = 1;
@@ -133,6 +137,10 @@ int main()
 
 		if (checkHp(playerHp, 1) != 2)
 		{
+			if (!game)
+			{
+				playerHp = 25;
+			}
 			turn = 1;
 			state = 1;
 			act = 4;
