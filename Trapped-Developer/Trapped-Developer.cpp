@@ -1,8 +1,4 @@
-#include <iostream>
-#include <cstdlib>
 #include "Trapped-Developer-functions.hpp"
-using namespace std;
-
 int main()
 {
 	bool game;
@@ -28,25 +24,25 @@ int main()
 
 		while (checkHp(playerHp, wolf.hp) == 0)
 		{
-			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name); //first enemy 'Saber Wolf'
+			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name, act, turn, state); //first enemy 'Saber Wolf'
 			text(act, turn);
 			if (state)
 			{
 				type();
 				do {
-					cin >> funcName;
+					getline(cin, funcName);
 					wrongFunc(funcName);
 				} while (checkFunc(funcName) > 0);
 				system("CLS");
-				wolf.hp = damage(1, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg, act, turn, wolf.name);
+				wolf.hp = newHp(funcName);
 			}
 			else
 			{
-				playerHp = damage(0, funcName, playerHp, wolf.hp, stick.dmg, wolf.dmg, act, turn, wolf.name);
+				playerHp = newHp(funcName);
+				next();
 			}
 			state = !state;
-			turn++;
-			next();
+			turn++;			
 		}
 
 		if (checkHp(playerHp, 1) != 2)
@@ -55,10 +51,11 @@ int main()
 			{
 				playerHp = 25;
 			}
-			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name);
+			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name, act, turn, state);
 			text(act, 10);
 			turn = 1;
 			state = 1;
+			next();
 
 			choose();
 			cin >> choice;
@@ -68,21 +65,21 @@ int main()
 				act = 2;
 				while (checkHp(playerHp, muson.hp) == 0)
 				{
-					stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name); //second enemy B 'Muson'
+					stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name, act, turn, state); //second enemy B 'Muson'
 					text(act, turn);
 					if (state)
 					{
 						type();
 						do {
-							cin >> funcName;
+							getline(cin, funcName);
 							wrongFunc(funcName);
 						} while (checkFunc(funcName) > 0);
 						system("CLS");
-						muson.hp = damage(1, funcName, playerHp, muson.hp, sword.dmg, muson.dmg, act, turn, muson.name);
+						muson.hp = newHp(funcName);
 					}
 					else
 					{
-						playerHp = damage(0, funcName, playerHp, muson.hp, sword.dmg, muson.dmg, act, turn, muson.name);
+						playerHp = newHp(funcName);
 					}
 					state = !state;
 					turn++;
@@ -91,7 +88,7 @@ int main()
 
 				if (checkHp(playerHp, 1) != 2)
 				{
-					stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name);
+					stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name, act, turn, state);
 					text(act, 10);
 					next();
 					wpnDmg = shield.dmg;
@@ -103,21 +100,21 @@ int main()
 				act = 3;
 				while (checkHp(playerHp, vent.hp) == 0)
 				{
-					stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name); //second enemy A 'Vent'
+					stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name, act, turn, state); //second enemy A 'Vent'
 					text(act, turn);
 					if (state)
 					{
 						type();
 						do {
-							cin >> funcName;
+							getline(cin, funcName);
 							wrongFunc(funcName);
 						} while (checkFunc(funcName) > 0);
 						system("CLS");
-						vent.hp = damage(1, funcName, playerHp, vent.hp, sword.dmg, vent.dmg, act, turn, vent.name);
+						vent.hp = newHp(funcName);
 					}
 					else
 					{
-						playerHp = damage(0, funcName, playerHp, vent.hp, sword.dmg, vent.dmg, act, turn, vent.name);
+						playerHp = newHp(funcName);
 					}
 					state = !state;
 					turn++;
@@ -126,7 +123,7 @@ int main()
 
 				if (checkHp(playerHp, 1) != 2)
 				{
-					stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name);
+					stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name, act, turn, state);
 					text(act, 10);
 					next();
 					wpnDmg = spear.dmg;
@@ -147,21 +144,21 @@ int main()
 
 			while (checkHp(playerHp, prez.hp) == 0)
 			{
-				stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name); //boss 'The President'
+				stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name, act, turn, state); //boss 'The President'
 				text(act, turn);
 				if (state)
 				{
 					type();
 					do {
-						cin >> funcName;
+						getline(cin, funcName);
 						wrongFunc(funcName);
 					} while (checkFunc(funcName) > 0);
 					system("CLS");
-					prez.hp = damage(1, funcName, playerHp, prez.hp, wpnDmg, prez.dmg, act, turn, prez.name);
+					prez.hp = newHp(funcName);
 				}
 				else
 				{
-					playerHp = damage(0, funcName, playerHp, prez.hp, wpnDmg, prez.dmg, act, turn, prez.name);					
+					playerHp = newHp(funcName);					
 				}
 				state = !state;
 				turn++;
@@ -170,12 +167,14 @@ int main()
 
 			if (checkHp(playerHp, 1) != 2)
 			{
-				stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name);
+				stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name, act, turn, state);
 				text(act, 10);
 				next();
 				act++;
 
 				text(act, 0);
+				next();
+				credits();
 				next();
 			}
 		}

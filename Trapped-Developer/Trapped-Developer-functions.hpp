@@ -6,7 +6,7 @@ using namespace std;
 
 bool state;
 int act, turn, playerHp, enemyHp, playerDmg, enemyDmg, turnDmg;
-string func = "", enemyN = "", textRow = "";
+string func = "", enemyName = "", textRow = "";
 string preRow[3] = { "  __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __",
 					 " |                                                                                         |",
 					 " |__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __|" };
@@ -64,12 +64,20 @@ void next()
 	system("CLS");
 }
 
+int hp0(int hp)
+{
+	if (hp <= 0)
+	{
+		return 0;
+	}
+	else
+	{
+		return hp;
+	}
+}
 string playerStats(int hp, string wpn, int dmg, int row) //hp = health points, wpnNum = weapon number
 {
-	if (hp < 0)
-	{
-		hp = 0;
-	}
+	hp = hp0(hp);
 	string hpText(1, char(hp) + 48);
 	string dmgText(1, char(dmg) + 48);
 	string space1, space2; //dmg = damage, space1 = empty space for first row
@@ -125,10 +133,7 @@ string playerStats(int hp, string wpn, int dmg, int row) //hp = health points, w
 }
 string enemyStats(int hp, string name, int dmg, int row)
 {
-	if (hp < 0)
-	{
-		hp = 0;
-	}
+	hp = hp0(hp);
 	string hpText(1, char(hp) + 48);
 	string dmgText(1, char(dmg) + 48);
 	string space1, space2, wpn, part;
@@ -212,10 +217,19 @@ string preRowFunc(int row, int len, bool side)
 		return line;
 	}
 }
-void stats(int playerhp, int wpnDmg, string wpnName, int enemyhp, int enemydmg, string enemyName)
+void stats(int playerHpMain, int playerDmgMain, string wpnName, int enemyHpMain, int enemyDmgMain, string enemyNameMain, int actMain, int turnMain, bool stateMain)
 {
-	int rowLen1 = size(playerStats(playerhp, wpnName, wpnDmg, 3));
-	int rowLen2 = size(enemyStats(enemyhp, enemyName, enemydmg, 3));
+	playerDmg = playerDmgMain;
+	enemyDmg = enemyDmgMain;
+	playerHp = playerHpMain;
+	enemyHp = enemyHpMain;
+	act = actMain;
+	turn = turnMain;
+	enemyName = enemyNameMain;
+	state = stateMain;
+
+	int rowLen1 = size(playerStats(playerHp, wpnName, playerDmg, 3));
+	int rowLen2 = size(enemyStats(enemyHp, enemyName, enemyDmg, 3));
 	int rowLen = rowLen1 + rowLen2;
 	int gapSpace = size(preRow[1]) - rowLen;
 	rowLen1 -= 3;
@@ -227,9 +241,9 @@ void stats(int playerhp, int wpnDmg, string wpnName, int enemyhp, int enemydmg, 
 	}
 
 	cout << preRowFunc(0, rowLen1, 1) << gap << preRowFunc(0, rowLen2, 0) << endl;
-	cout << playerStats(playerhp, wpnName, wpnDmg, 1) << gap << enemyStats(enemyhp, enemyName, enemydmg, 1) << endl;
-	cout << playerStats(playerhp, wpnName, wpnDmg, 2) << gap << enemyStats(enemyhp, enemyName, enemydmg, 2) << endl;
-	cout << playerStats(playerhp, wpnName, wpnDmg, 3) << gap << enemyStats(enemyhp, enemyName, enemydmg, 3) << endl;
+	cout << playerStats(playerHp, wpnName, playerDmg, 1) << gap << enemyStats(enemyHp, enemyName, enemyDmg, 1) << endl;
+	cout << playerStats(playerHp, wpnName, playerDmg, 2) << gap << enemyStats(enemyHp, enemyName, enemyDmg, 2) << endl;
+	cout << playerStats(playerHp, wpnName, playerDmg, 3) << gap << enemyStats(enemyHp, enemyName, enemyDmg, 3) << endl;
 	cout << preRowFunc(2, rowLen1, 1) << gap << preRowFunc(2, rowLen2, 0) << endl;
 }
 
@@ -251,7 +265,6 @@ string textAttack()
 {
 	string dmgText(1, char(turnDmg) + 48);
 	string part, part2, hp;
-
 	if (turnDmg > 9)
 	{
 		string dmg1(1, char(turnDmg % 10) + 48), dmg2(1, char(floor(turnDmg / 10) + 48));
@@ -261,25 +274,25 @@ string textAttack()
 	if (turn % 2 == 0)
 	{
 		part = " |  THE PLAYER USED '";
-		string hp0(1, char(enemyHp) + 48);
+		string hp3(1, char(hp0(enemyHp)) + 48);
 		if (enemyHp > 9)
 		{
 			string hp1(1, char(enemyHp % 10) + 48), hp2(1, char(floor(enemyHp / 10) + 48));
-			hp0 = hp2 + hp1;
+			hp3 = hp2 + hp1;
 		}
-		hp = hp0;
+		hp = hp3;
 		part2 = " |  THE ENEMY'S HEALTH DROPPED DOWN TO ";
 	}
 	else
 	{
 		part = " |  THE ENEMY USED '";
-		string hp0(1, char(playerHp) + 48);
+		string hp3(1, char(hp0(playerHp)) + 48);
 		if (playerHp > 9)
 		{
 			string hp1(1, char(playerHp % 10) + 48), hp2(1, char(floor(playerHp / 10) + 48));
-			hp0 = hp2 + hp1;
+			hp3 = hp2 + hp1;
 		}
-		hp = hp0;
+		hp = hp3;
 		part2 = " |  THE PLAYER'S HEALTH DROPPED DOWN TO ";
 	}
 	part = part + func + "' FOR " + dmgText + " DAMAGE.";
@@ -370,6 +383,7 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn == 10)
 		{
+			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
 			//you managed to defeat the enemy + finishing blow
 		}
 		else if (turn == 1)
@@ -404,6 +418,7 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn == 10)
 		{
+			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
 			//you managed to defeat the enemy + finishing blow
 		}
 		else if (turn == 1)
@@ -438,6 +453,7 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn == 10)
 		{
+			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
 			//you managed to defeat the enemy + finishing blow
 		}
 		else if (turn == 1)
@@ -621,8 +637,8 @@ int funcExe()
 	}
 	else if (func == "Zandatsu" && (andIf(2) || andIf(3)))
 	{
-		textRow = " | Dev: I think it's time for Jack to let 'er rip!";
-		turnDmg = 100;
+		textRow = " | Dev: I think it's time for Jack... to let 'er rip!";
+		turnDmg = 99;
 	}
 	else if (func == "Whip" && (playerDmg == 10 || enemyDmg == 10))
 	{
@@ -637,7 +653,7 @@ int funcExe()
 	{
 		func = "Explosion";
 		textRow = " | Dev: I'm fucking invincible!";
-		turnDmg = 100;
+		turnDmg = 99;
 	}
 	else if ((func == "Push" || func == "Thrust") && (playerDmg == 7 || enemyDmg == 7))
 	{
@@ -668,7 +684,7 @@ int funcExe()
 			att[18].b++;
 			textRow = " | Dev: I'm going to turn you into human spaghetti bolognese!";
 		}
-		turnDmg = 100;
+		turnDmg = 99;
 	}
 	else if (func == "Slam" && (playerDmg == 7 || enemyDmg == 7))
 	{
@@ -757,17 +773,9 @@ int enemyAttack()
 		}
 	}
 }
-int damage(bool stateMain, string funcMain, int playerHpMain, int enemyHpMain, int playerDmgMain, int enemyDmgMain, int actMain, int turnMain, string enemyNameMain)
+int newHp(string funcMain)
 {
-	state = stateMain;
 	func = funcMain;
-	playerDmg = playerDmgMain;
-	enemyDmg = enemyDmgMain;
-	playerHp = playerHpMain;
-	enemyHp = enemyHpMain;
-	act = actMain;
-	turn = turnMain;
-	enemyN = enemyNameMain;
 
 	if (state)
 	{
@@ -793,11 +801,11 @@ void wrongFunc(string funcName)
 {
 	if (checkFunc(funcName) == 2)
 	{
-		cout << " This is an illogical function! I have to type a logical one. ";
+		cout << "\n This is an illogical function! I have to type a logical one. \n";
 	}
 	else if (checkFunc(funcName) == 1)
 	{
-		cout << " I have already used this function and I can't use it again! I have to think of another function.\n  *some functions have more than one name* ";
+		cout << "\n I have already used this function and I can't use it again! I have to think of another function.\n  *some functions have more than one name* \n";
 	}
 }
 
@@ -834,4 +842,8 @@ void gameOver()
 	cout << " |            / (_ /  / __ | / /|_/ /  / _/       / /_/ / | |/ /  / _/   / , _/            |\n";
 	cout << " |            \\___/  /_/ |_|/_/  /_/  /___/       \\____/  |___/  /___/  /_/|_|             |\n";
 	cout << preRow[2] << endl;
+}
+void credits()
+{
+
 }
