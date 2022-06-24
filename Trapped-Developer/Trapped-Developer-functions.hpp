@@ -185,12 +185,12 @@ string enemyStats(int hp, string name, int dmg, int row)
 		break;
 	}
 }
-string preRowFunc(int row, int len, char c, bool side)
+string preRowFunc(int row, int len, bool side)
 {
 	string line = "";
 	for (int i = 0; i < len; i++)
 	{
-		line += c;
+		line += "_";
 	}
 
 	if (row == 0)
@@ -225,12 +225,11 @@ void stats(int playerhp, int wpnDmg, string wpnName, int enemyhp, int enemydmg, 
 		gap += ' ';
 	}
 
-	cout << preRowFunc(0, rowLen1, '_', 1) << gap << preRowFunc(0, rowLen2, '_', 0) << endl;
-	cout << preRowFunc(1, rowLen1, ' ', 1) << gap << preRowFunc(1, rowLen2, ' ', 0) << endl;
+	cout << preRowFunc(0, rowLen1, 1) << gap << preRowFunc(0, rowLen2, 0) << endl;
 	cout << playerStats(playerhp, wpnName, wpnDmg, 1) << gap << enemyStats(enemyhp, enemyName, enemydmg, 1) << endl;
 	cout << playerStats(playerhp, wpnName, wpnDmg, 2) << gap << enemyStats(enemyhp, enemyName, enemydmg, 2) << endl;
 	cout << playerStats(playerhp, wpnName, wpnDmg, 3) << gap << enemyStats(enemyhp, enemyName, enemydmg, 3) << endl;
-	cout << preRowFunc(2, rowLen1, '_', 1) << gap << preRowFunc(2, rowLen2, '_', 0) << endl;
+	cout << preRowFunc(2, rowLen1, 1) << gap << preRowFunc(2, rowLen2, 0) << endl;
 }
 
 string empty()
@@ -268,7 +267,7 @@ string textAttack()
 			hp0 = hp2 + hp1;
 		}
 		hp = hp0;
-		part2 = " |  THE ENEMY'S HP DROPPED DOWN TO ";
+		part2 = " |  THE ENEMY'S HEALTH DROPPED DOWN TO ";
 	}
 	else
 	{
@@ -280,11 +279,11 @@ string textAttack()
 			hp0 = hp2 + hp1;
 		}
 		hp = hp0;
-		part2 = " |  THE PLAYER'S HP DROPPED DOWN TO ";
+		part2 = " |  THE PLAYER'S HEALTH DROPPED DOWN TO ";
 	}
 	part = part + func + "' FOR " + dmgText + " DAMAGE.";
-	part2 = part2 + hp + " HEALTH.";
-	return part + spaceFunc(part) + part2 + spaceFunc(part2);
+	part2 = part2 + hp + "HP.";
+	return preRow[1] + "\n" + part + spaceFunc(part) + preRow[1] + "\n" + part2 + spaceFunc(part2);
 }
 void text(int actMain, int turnMain)
 {
@@ -304,7 +303,9 @@ void text(int actMain, int turnMain)
 		cout << " |      I remember is... *scratces head* falling asleep in front of my computer screen.    |\n";
 		cout << " |      I must've gotten tired after all that programming. And what is this thing stuck    |\n";
 		cout << " |      to my belt?                                                                        |\n";
+		cout << preRow[1] << endl;
 		cout << " |  CONGRATULATIONS! YOU FOUND A 'Stick'!                                                  |\n";
+		cout << preRow[1] << endl;
 		cout << " | Dev: Wait a minute. That's like the first weapon in the game I'm making. And the name   |\n";
 		cout << " |      infront of everything I say is 'Dev'. Is that short for 'Developer'? Am I in my    |\n";
 		cout << " |      own game!? Does that mean I will have to fight against...                          |\n";
@@ -316,14 +317,19 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn == 10)
 		{
-			cout << textRow << spaceFunc(textRow) << textAttack();
-			textRow = " Saber Wolf: Cannot... continue...";
+			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
+			textRow = " | Saber Wolf: Cannot... proceed...";
+			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
+			textRow = " |  CONGRATULATIONS! YOU DEFEATED 'Saber Wolf'!";
+			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
+			textRow = " |  CONGRATULATIONS! YOU FOUND 'Cutting edge Sword' IN ITS BLOODY CORPSE!";
+			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn == 1)
 		{
 			textRow = " | Dev: ... Saber Wolf!";
 			cout << textRow << spaceFunc(textRow);
-			textRow = " | Saber Wolf: Greetings, human. I am a bionical IF prototype IQ-184i.";
+			textRow = " | Saber Wolf: Greetings, human. I am bionical IF prototype IQ-184i.";
 			cout << textRow << spaceFunc(textRow);
 			textRow = " |             I possess IQ far beyond that of a human.";
 			cout << textRow << spaceFunc(textRow);
@@ -774,6 +780,10 @@ int damage(bool stateMain, string funcMain, int playerHpMain, int enemyHpMain, i
 	}
 }
 
+void choose()
+{
+	cout << "\n *type 0 or 1, depending on which path you want to take. 0 for left and 1 for right.*\n ";
+}
 void type()
 {
 	cout << "\n *type a function to attack, start each word (if multiple) with a capital letter* \n ";

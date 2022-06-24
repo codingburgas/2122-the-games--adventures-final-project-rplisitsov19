@@ -49,10 +49,10 @@ int main()
 		{
 			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name);
 			text(act, 10);
-			next();
 			turn = 1;
 			state = 1;
 
+			choose();
 			cin >> choice;
 			next();
 			if (choice)
