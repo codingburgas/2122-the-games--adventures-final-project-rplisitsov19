@@ -6,7 +6,7 @@ using namespace std;
 
 bool state;
 int act, turn, playerHp, enemyHp, playerDmg, enemyDmg, turnDmg;
-string func = "", enemyN = "", rowAttack = "";
+string func = "", enemyN = "", textRow = "";
 string preRow[3] = { "  __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __",
 					 " |                                                                                         |",
 					 " |__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __|" };
@@ -237,10 +237,10 @@ string empty()
 {
 	return "\n\n\n\n\n\n";
 }
-string spaceFunc(string textRow)
+string spaceFunc(string row)
 {
 	string output;
-	for (int i = 0; i < size(preRow[1]) - size(textRow) - 1; i++)
+	for (int i = 0; i < size(preRow[1]) - size(row) - 1; i++)
 	{
 		output += " ";
 	}
@@ -250,7 +250,7 @@ string spaceFunc(string textRow)
 string textAttack()
 {
 	string dmgText(1, char(turnDmg) + 48);
-	string part;
+	string part, part2, hp;
 
 	if (turnDmg > 9)
 	{
@@ -260,14 +260,31 @@ string textAttack()
 
 	if (turn % 2 == 0)
 	{
-		part = " | DEV USED '";
+		part = " |  THE PLAYER USED '";
+		string hp0(1, char(enemyHp) + 48);
+		if (enemyHp > 9)
+		{
+			string hp1(1, char(enemyHp % 10) + 48), hp2(1, char(floor(enemyHp / 10) + 48));
+			hp0 = hp2 + hp1;
+		}
+		hp = hp0;
+		part2 = " |  THE ENEMY'S HP DROPPED DOWN TO ";
 	}
 	else
 	{
-		part = " | THE ENEMY USED '";
+		part = " |  THE ENEMY USED '";
+		string hp0(1, char(playerHp) + 48);
+		if (playerHp > 9)
+		{
+			string hp1(1, char(playerHp % 10) + 48), hp2(1, char(floor(playerHp / 10) + 48));
+			hp0 = hp2 + hp1;
+		}
+		hp = hp0;
+		part2 = " |  THE PLAYER'S HP DROPPED DOWN TO ";
 	}
 	part = part + func + "' FOR " + dmgText + " DAMAGE.";
-	return part + spaceFunc(part);
+	part2 = part2 + hp + " HEALTH.";
+	return part + spaceFunc(part) + part2 + spaceFunc(part2);
 }
 void text(int actMain, int turnMain)
 {
@@ -282,15 +299,15 @@ void text(int actMain, int turnMain)
 	switch (act)
 	{
 	case 0:
-		cout << " |  Dev: *yawns* Where am I? It seems I am on some kind of rope bridge Hey I can see what  |\n";
-		cout << " |     I'm saying as text. Why is it in this font? This is very weird. The last thing      |\n";
-		cout << " |     I remember is... *scratces head* falling asleep in front of my computer screen.     |\n";
-		cout << " |     I must've gotten tired after all that programming. And what is this thing stuck     |\n";
-		cout << " |     to my belt?                                                                         |\n";
-		cout << " | CONGRATULATIONS! YOU FOUND A 'Stick'!                                                   |\n";
-		cout << " |  Dev: Wait a minute. That's like the first weapon in the game I'm making. And the name  |\n";
-		cout << " |     infront of everything I say is 'Dev'. Is that short for 'Developer'? Am I in my     |\n";
-		cout << " |     own game!? Does that mean I will have to fight against...                           |\n";
+		cout << " | Dev: *yawns* Where am I? It seems I am on some kind of rope bridge Hey I can see what   |\n";
+		cout << " |      I'm saying as text. Why is it in this font? This is very weird. The last thing     |\n";
+		cout << " |      I remember is... *scratces head* falling asleep in front of my computer screen.    |\n";
+		cout << " |      I must've gotten tired after all that programming. And what is this thing stuck    |\n";
+		cout << " |      to my belt?                                                                        |\n";
+		cout << " |  CONGRATULATIONS! YOU FOUND A 'Stick'!                                                  |\n";
+		cout << " | Dev: Wait a minute. That's like the first weapon in the game I'm making. And the name   |\n";
+		cout << " |      infront of everything I say is 'Dev'. Is that short for 'Developer'? Am I in my    |\n";
+		cout << " |      own game!? Does that mean I will have to fight against...                          |\n";
 		break;
 	case 1:
 		if (turn == 0)
@@ -299,31 +316,44 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn == 10)
 		{
-			//you managed to defeat the enemy + finishing blow
+			cout << textRow << spaceFunc(textRow) << textAttack();
+			textRow = " Saber Wolf: Cannot... continue...";
 		}
 		else if (turn == 1)
 		{
-			//oh no it's a monster you have to attack
+			textRow = " | Dev: ... Saber Wolf!";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | Saber Wolf: Greetings, human. I am a bionical IF prototype IQ-184i.";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " |             I possess IQ far beyond that of a human.";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | Dev: If you're so smart then: What's the meaning of life?";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | Saber Wolf: I am here to kill you, not to make small talk.";
+			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
+			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  Saber Wolf: I will show you what superior intelligence can do!";
+				textRow = " | Saber Wolf: I will show you what superior intelligence can do!";
 				break;
 			case 2:
-				rowAttack = " |  Saber Wolf: Someone on your intelligence level can never do anything to me!";
+				textRow = " | Exterminate!";
 				break;
 			case 3:
-				rowAttack = " |  Saber Wolf: This is it for you, monkey!";
+				textRow = " | Saber Wolf: Someone on your intelligence level can never do anything to me!";
+				break;
+			case 4:
+				textRow = " | Saber Wolf: This is it for you, monkey!";
 				break;
 			}
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
+			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
 		break;
 	case 2:
@@ -341,23 +371,23 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
+			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  This world and all its living people are memes, something you won't be soon!";
+				textRow = " | This world and all its living people are memes, something you won't be soon!";
 				break;
 			case 2:
-				rowAttack = " |  Free will is the ability to create memes, so take this meme to your grave!";
+				textRow = " | Free will is the ability to create memes, so take this meme to your grave!";
 				break;
 			case 3:
-				rowAttack = " |  Too bad you'll die before passing down any memes.";
+				textRow = " | Too bad you'll die before passing down any memes.";
 				break;
 			}
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
+			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
 		break;
 	case 3:
@@ -375,23 +405,23 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
+			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  Come, le mec!";
+				textRow = " | Come, le mec!";
 				break;
 			case 2:
-				rowAttack = " |  I will tear you apart!";
+				textRow = " | I will tear you apart!";
 				break;
 			case 3:
-				rowAttack = " |  Good night!";
+				textRow = " | Good night!";
 				break;
 			}
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
+			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
 		break;
 	case 4:
@@ -409,23 +439,23 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn % 2 == 0)
 		{
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
+			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
 		else
 		{
 			switch (turn / 2)
 			{
 			case 1:
-				rowAttack = " |  Played college ball, ya know";
+				textRow = " | Played college ball, ya know";
 				break;
 			case 2:
-				rowAttack = " |  Don't mess with this president!";
+				textRow = " | Don't mess with this president!";
 				break;
 			case 3:
-				rowAttack = " |  Taste the power of nanomachines!";
+				textRow = " | Taste the power of nanomachines!";
 				break;
 			}
-			cout << rowAttack << spaceFunc(rowAttack) << textAttack();
+			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
 		break;
 	case 5:
@@ -513,7 +543,7 @@ int funcExe()
 		{
 			att[4].b++;
 		}
-		rowAttack = " |  Dev: Take this!";
+		textRow = " | Dev: Take this!";
 		turnDmg = entityDmg;
 	}
 	else if (func == "Charge" || func == "Punch")
@@ -526,7 +556,7 @@ int funcExe()
 		{
 			att[6].b++;
 		}
-		rowAttack = " |  Dev: I don't want to hurt you!";
+		textRow = " | Dev: I don't want to hurt you!";
 		turnDmg = 9;
 	}
 	else if (func == "Kick")
@@ -534,7 +564,7 @@ int funcExe()
 		if (state)
 		{
 			att[7].b++;
-			rowAttack = " |  Dev: *kiai*";
+			textRow = " | Dev: *kiai*";
 		}		
 		turnDmg = 10;
 	}
@@ -543,7 +573,7 @@ int funcExe()
 		if (state)
 		{
 			att[8].b++;
-			rowAttack = " |  Dev: Snipe!";
+			textRow = " | Dev: Snipe!";
 		}
 		turnDmg = 2 * entityDmg;
 	}
@@ -565,7 +595,7 @@ int funcExe()
 		if (state)
 		{
 			att[9].b++;
-			rowAttack = " |  Dev: *poke*";
+			textRow = " | Dev: *poke*";
 		}
 		turnDmg = entityDmg + bonusDmg;
 	}
@@ -579,12 +609,12 @@ int funcExe()
 		{
 			att[11].b++;
 		}
-		rowAttack = " |  Dev: Slice and dice!";
+		textRow = " | Dev: Slice and dice!";
 		turnDmg = entityDmg + 2;
 	}
 	else if (func == "Zandatsu" && (andIf(2) || andIf(3)))
 	{
-		rowAttack = " |  Dev: I think it's time for Jack to let 'er rip!";
+		textRow = " | Dev: I think it's time for Jack to let 'er rip!";
 		turnDmg = 100;
 	}
 	else if (func == "Whip" && (playerDmg == 10 || enemyDmg == 10))
@@ -592,14 +622,14 @@ int funcExe()
 		if (state)
 		{
 			att[13].b++;
-			rowAttack = " |  Dev: Die!";
+			textRow = " | Dev: Die!";
 		}
 		turnDmg = entityDmg + 7;
 	}
 	else if ((func == "I am fucking invincible" || func == "I'm fucking invincible") && playerDmg == 7)
 	{
 		func = "Explosion";
-		rowAttack = " |  Dev: I'm fucking invincible!";
+		textRow = " | Dev: I'm fucking invincible!";
 		turnDmg = 100;
 	}
 	else if ((func == "Push" || func == "Thrust") && (playerDmg == 7 || enemyDmg == 7))
@@ -612,7 +642,7 @@ int funcExe()
 		{
 			att[16].b++;
 		}
-		rowAttack = " |  Dev: Dodge this!";
+		textRow = " | Dev: Dodge this!";
 		turnDmg = entityDmg * 2;
 	}
 	else if ((func == "Spin" || func == "Spin Attack") && (playerDmg == 15 || enemyDmg == 15))
@@ -620,7 +650,7 @@ int funcExe()
 		if (state)
 		{
 			att[17].b++;
-			rowAttack = " |  Dev: Beyblade time!";
+			textRow = " | Dev: Beyblade time!";
 		}
 		turnDmg = entityDmg * 2;
 	}
@@ -629,7 +659,7 @@ int funcExe()
 		if (state)
 		{
 			att[18].b++;
-			rowAttack = " |  Dev: I'm going to turn you into human spaghetti bolognese!";
+			textRow = " | Dev: I'm going to turn you into human spaghetti bolognese!";
 		}
 		turnDmg = 100;
 	}
@@ -638,7 +668,7 @@ int funcExe()
 		if (state)
 		{
 			att[19].b++;
-			rowAttack = " |  Dev: AoE for the win!";
+			textRow = " | Dev: AoE for the win!";
 		}
 		turnDmg = entityDmg + 4;
 	}
@@ -650,23 +680,28 @@ int enemyAttack()
 	switch (act)
 	{
 	case 1:
-		switch (turn)
+		switch (turn / 2)
 		{
 		case 1:
+			func = "Miss";
+			turnDmg = 0;
+			return turnDmg;
+			break;
+		case 2:
 			func = "Hit";
 			return funcExe();
 			break;
-		case 2:
+		case 3:
 			func = "Slash";
 			return funcExe();
 			break;
-		case 3:
+		case 4:
 			func = "Cut";
 			return funcExe();
 			break;
 		}
 	case 2:
-		switch (turn)
+		switch (turn / 2)
 		{
 		case 1:
 			func = "Slash";
@@ -682,7 +717,7 @@ int enemyAttack()
 			break;
 		}
 	case 3:
-		switch (turn)
+		switch (turn / 2)
 		{
 		case 1:
 			func = "Slash";
@@ -698,7 +733,7 @@ int enemyAttack()
 			break;
 		}
 	case 4:
-		switch (turn)
+		switch (turn / 2)
 		{
 		case 1:
 			func = "Punch";
@@ -729,11 +764,13 @@ int damage(bool stateMain, string funcMain, int playerHpMain, int enemyHpMain, i
 
 	if (state)
 	{
-		return enemyHp - funcExe();
+		enemyHp -= funcExe();
+		return enemyHp;
 	}
 	else
 	{
-		return playerHp - enemyAttack();
+		playerHp -= enemyAttack();
+		return playerHp;
 	}
 }
 
