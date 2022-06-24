@@ -131,49 +131,50 @@ string enemyStats(int hp, string name, int dmg, int row)
 	}
 	string hpText(1, char(hp) + 48);
 	string dmgText(1, char(dmg) + 48);
-	string space1, space2;
-	int sp1Len = 1, sp2Len = 1;
+	string space1, space2, wpn, part;
+	int sp1Len, sp2Len;
 
 	if (name == "Saber Wolf")
 	{
-		sp1Len += 3;
+		wpn = wolf.wpn;
 	}
 	else if (name == "Vent")
 	{
-		sp1Len += 9;
+		wpn = vent.wpn;
 	}
 	else if (name == "Muson")
 	{
-		sp1Len += 8;
+		wpn = muson.wpn;
 	}
-
-	if (dmg > 9)
+	else
 	{
-		sp1Len++;
-		sp2Len++;
+		wpn = prez.wpn;
 	}
 
 	switch (row)
 	{
 	case 1:
+		part = "| " + name;
+		sp1Len = (size(enemyStats(hp, name, dmg, 3)) - size(part) - 2);
 		for (int i = 0; i < sp1Len; i++)
 		{
 			space1 += ' ';
 		}
-		return "| " + name + space1 + " |";
+		return part + space1 + " |";
 		break;
 	case 2:
 		if (hp > 9)
 		{
-			sp2Len--;
 			string hp1(1, char(hp % 10) + 48), hp2(1, char(floor(hp / 10) + 48));
 			hpText = hp2 + hp1;
-		}
+		}		
+		part = "|  Health: " + hpText + "HP";
+		sp2Len = (size(enemyStats(hp, name, dmg, 3)) - size(part) - 2);
 		for (int i = 0; i < sp2Len; i++)
 		{
 			space2 += ' ';
 		}
-		return "|   Health: " + hpText + "HP" + space2 + " |";
+		return part + space2 + " |";
 		break;
 	case 3:
 		if (dmg > 9)
@@ -181,7 +182,7 @@ string enemyStats(int hp, string name, int dmg, int row)
 			string dmg1(1, char(dmg % 10) + 48), dmg2(1, char(floor(dmg / 10) + 48));
 			dmgText = dmg2 + dmg1;
 		}
-		return "|   Attack: " + dmgText + "DMG" + " |";
+		return "|  Weapon: " + wpn + " - " + dmgText + "DMG" + " |";
 		break;
 	}
 }
@@ -323,7 +324,7 @@ void text(int actMain, int turnMain)
 			textRow = " |  CONGRATULATIONS! YOU DEFEATED 'Saber Wolf'!";
 			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
 			textRow = " |  CONGRATULATIONS! YOU FOUND 'Cutting edge Sword' IN ITS BLOODY CORPSE!";
-			cout << textRow << spaceFunc(textRow);
+			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
 		}
 		else if (turn == 1)
 		{
