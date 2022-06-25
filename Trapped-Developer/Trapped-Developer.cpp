@@ -80,10 +80,10 @@ int main()
 					else
 					{
 						playerHp = newHp(funcName);
+						next();
 					}
 					state = !state;
-					turn++;
-					next();
+					turn++;					
 				}
 
 				if (checkHp(playerHp, 1) != 2)
@@ -115,10 +115,10 @@ int main()
 					else
 					{
 						playerHp = newHp(funcName);
+						next();
 					}
 					state = !state;
 					turn++;
-					next();
 				}
 
 				if (checkHp(playerHp, 1) != 2)
@@ -158,11 +158,11 @@ int main()
 				}
 				else
 				{
-					playerHp = newHp(funcName);					
+					playerHp = newHp(funcName);
+					next();
 				}
 				state = !state;
 				turn++;
-				next();
 			}
 
 			if (checkHp(playerHp, 1) != 2)
@@ -174,6 +174,7 @@ int main()
 
 				text(act, 0);
 				next();
+
 				credits();
 				next();
 			}
@@ -181,8 +182,8 @@ int main()
 
 		if (checkHp(playerHp, 1) == 2)
 		{
-			text(act, 0); //the enemy defeats the player
-			next();
+			//text(act, 0); //the enemy defeats the player
+			//next();
 
 			gameOver();
 			next();

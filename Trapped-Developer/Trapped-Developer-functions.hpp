@@ -21,7 +21,7 @@ void funcSet()
 {
 	att[0].name = "Hit", att[1].name = "Slash", att[2].name = "Attack", att[3].name = "Bonk", att[4].name = "Swing", att[5].name = "Charge", att[6].name = "Punch";
 	att[7].name = "Kick", att[8].name = "Throw", att[9].name = "Stab", att[10].name = "Slice", att[11].name = "Cut", att[12].name = "Zandatsu", att[13].name = "Whip";
-	att[14].name = "I'm fucking invincible!", att[15].name = "Push", att[16].name = "Thurst", att[17].name = "Spin", att[18].name = "Bolognese", att[19].name = "Slam";
+	att[14].name = "I'm fucking invincible!", att[15].name = "Push", att[16].name = "Thrust", att[17].name = "Spin", att[18].name = "Bolognese", att[19].name = "Slam";
 	for (int i = 0; i < 8; i++)
 	{
 		att[i].wpn[0] = 5, att[i].wpn[1] = 12, att[i].wpn[2] = 10, att[i].wpn[3] = 7;
@@ -54,7 +54,7 @@ struct enemy
 	string name;
 	string wpn;
 	int dmg;
-}Wolf(15, "Saber Wolf"), Etrangere(20, "Etrangere"), Memesoon(25, "Memesoon"), Prez(30, "The President");
+}Wolf(21, "Saber Wolf"), Etrangere(30, "Etrangere"), Memesoon(35, "Memesoon"), Prez(40, "The President");
 void setEnemyWpn()
 {
 	Wolf.wpn = sword.name;
@@ -592,7 +592,7 @@ int funcExe()
 			att[6].b++;
 		}
 		textRow = " | Dev: I don't want to hurt you!";
-		turnDmg = 9;
+		turnDmg = 8;
 	}
 	else if (func == "Kick")
 	{
@@ -601,7 +601,7 @@ int funcExe()
 			att[7].b++;
 			textRow = " | Dev: *kiai*";
 		}		
-		turnDmg = 10;
+		turnDmg = 11;
 	}
 	else if (func == "Throw" && (playerDmg == 5 || entityDmg == 10))
 	{
@@ -624,7 +624,7 @@ int funcExe()
 		}
 		else if (entityDmg == 10)
 		{
-			bonusDmg = 5;
+			bonusDmg = 2;
 		}
 
 		if (state)
@@ -659,7 +659,7 @@ int funcExe()
 			att[13].b++;
 			textRow = " | Dev: Die!";
 		}
-		turnDmg = entityDmg + 7;
+		turnDmg = entityDmg + 8;
 	}
 	else if (func == "I'm fucking invincible!" && playerDmg == 7)
 	{
@@ -687,7 +687,7 @@ int funcExe()
 			att[17].b++;
 			textRow = " | Dev: Beyblade time!";
 		}
-		turnDmg = entityDmg * 2;
+		turnDmg = entityDmg + 8;
 	}
 	else if (func == "Spaghetti Bolognese" && playerDmg == 10)
 	{
@@ -705,7 +705,7 @@ int funcExe()
 			att[19].b++;
 			textRow = " | Dev: AoE for the win!";
 		}
-		turnDmg = entityDmg + 4;
+		turnDmg = entityDmg + 5;
 	}
 
 	return turnDmg;
@@ -771,15 +771,15 @@ int enemyAttack()
 		switch (turn / 2)
 		{
 		case 1:
-			func = "Punch";
+			func = "Bonk";
 			return funcExe();
 			break;
 		case 2:
-			func = "Kick";
+			func = "Punch";
 			return funcExe();
 			break;
 		case 3:
-			func = "Bonk";
+			func = "Kick";
 			return funcExe();
 			break;
 		}
@@ -810,7 +810,7 @@ void choose()
 }
 void type()
 {
-	cout << "\n *type a function to attack, start each word (if multiple) with a capital letter* \n ";
+	cout << "\n *type a function to attack, start it with a capital letter* \n ";
 }
 void wrongFunc(string funcName)
 {
@@ -833,9 +833,9 @@ void trappedDev()
 	cout << "                _| _|  \\__,_| .__/  .__/ \\___| \\__,_|    ____/ \\___|   \\_/ \\___| _| \\___/  .__/ \\___| _|\n";
 	cout << "                             _|    _|                                                     _|\n";
 	cout << "\n\n";
-	cout << " SELECT A GAME MODE:\n\n";
-	cout << "  0. Video game journalist\n";
-	cout << "  1. Normal\n\n ";
+	cout << "                                                    SELECT A GAME MODE:\n\n";
+	cout << "                                                 0. Video game journalist\n";
+	cout << "                                                        1. Normal\n\n ";
 }
 void rustGear()
 {
@@ -860,5 +860,9 @@ void gameOver()
 }
 void credits()
 {
-
+	cout << "\n                                                          CREDITS";
+	cout << "\n\n\n                                                  Game by Yanislav Yanev";
+	cout << "\n\n\n                                                         Based on:";
+	cout << "\n\n          Metal Gear Rising: Revengeance by PlatinumGames Inc., published by Konami Digital Entertainment Co.";
+	cout << "\n\n              Metal Gear Solid 3: Snake Eater by Konami Computer Entertainment Japan, published by Konami";
 }
