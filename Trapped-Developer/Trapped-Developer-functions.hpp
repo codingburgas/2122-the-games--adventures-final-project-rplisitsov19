@@ -15,12 +15,22 @@ struct function
 {
 	string name;
 	bool b = 0;
+	int wpn[4] = { 0, 0, 0, 0 };
 }att[20];
 void funcSet()
 {
 	att[0].name = "Hit", att[1].name = "Slash", att[2].name = "Attack", att[3].name = "Bonk", att[4].name = "Swing", att[5].name = "Charge", att[6].name = "Punch";
 	att[7].name = "Kick", att[8].name = "Throw", att[9].name = "Stab", att[10].name = "Slice", att[11].name = "Cut", att[12].name = "Zandatsu", att[13].name = "Whip";
-	att[14].name = "Explosion", att[15].name = "Push", att[16].name = "Thurst", att[17].name = "Spin", att[18].name = "Bolognese", att[19].name = "Slam";
+	att[14].name = "I'm fucking invincible!", att[15].name = "Push", att[16].name = "Thurst", att[17].name = "Spin", att[18].name = "Bolognese", att[19].name = "Slam";
+	for (int i = 0; i < 8; i++)
+	{
+		att[i].wpn[0] = 5, att[i].wpn[1] = 12, att[i].wpn[2] = 10, att[i].wpn[3] = 7;
+	}
+	att[8].wpn[0] = 5, att[8].wpn[1] = 10;
+	att[9].wpn[0] = 5, att[9].wpn[1] = 10, att[9].wpn[2] = 12;
+	att[10].wpn[0] = 12, att[11].wpn[0] = 12, att[12].wpn[0] = 12, att[17].wpn[0] = 12;
+	att[13].wpn[0] = 10, att[18].wpn[0] = 10;
+	att[14].wpn[0] = 7, att[15].wpn[0] = 7, att[16].wpn[0] = 7, att[19].wpn[0] = 7;
 }
 
 struct weapon
@@ -141,7 +151,7 @@ string enemyStats(int hp, string name, int dmg, int row)
 
 	if (name == "Saber Wolf")
 	{
-		wpn = wolf.wpn;
+		wpn = Wolf.wpn;
 	}
 	else if (name == "Etrangere")
 	{
@@ -153,7 +163,7 @@ string enemyStats(int hp, string name, int dmg, int row)
 	}
 	else
 	{
-		wpn = prez.wpn;
+		wpn = Prez.wpn;
 	}
 
 	switch (row)
@@ -254,7 +264,7 @@ string empty()
 string spaceFunc(string row)
 {
 	string output;
-	for (int i = 0; i < size(preRow[1]) - size(row) - 1; i++)
+	for (int i = 1; i <= size(preRow[1]) - size(row) - 1; i++)
 	{
 		output += " ";
 	}
@@ -417,40 +427,40 @@ void text(int actMain, int turnMain)
 		}
 		break;
 	case 3:
-		if (turn == 0)
-		{
-			//the enemy defeated you + finishing blow
-		}
-		else if (turn == 10)
-		{
-			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
-			//you managed to defeat the enemy + finishing blow
-		}
-		else if (turn == 1)
-		{
-			//oh no it's a monster you have to attack
-		}
-		else if (turn % 2 == 0)
-		{
-			cout << textRow << spaceFunc(textRow) << textAttack();
-		}
-		else
-		{
-			switch (turn / 2)
-			{
-			case 1:
-				textRow = " | Come, le mec!";
-				break;
-			case 2:
-				textRow = " | I will tear you apart!";
-				break;
-			case 3:
-				textRow = " | Good night!";
-				break;
-			}
-			cout << textRow << spaceFunc(textRow) << textAttack();
-		}
+if (turn == 0)
+{
+	//the enemy defeated you + finishing blow
+}
+else if (turn == 10)
+{
+	cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
+	//you managed to defeat the enemy + finishing blow
+}
+else if (turn == 1)
+{
+	//oh no it's a monster you have to attack
+}
+else if (turn % 2 == 0)
+{
+	cout << textRow << spaceFunc(textRow) << textAttack();
+}
+else
+{
+	switch (turn / 2)
+	{
+	case 1:
+		textRow = " | Come, le mec!";
 		break;
+	case 2:
+		textRow = " | I will tear you apart!";
+		break;
+	case 3:
+		textRow = " | Good night!";
+		break;
+	}
+	cout << textRow << spaceFunc(textRow) << textAttack();
+}
+break;
 	case 4:
 		if (turn == 0)
 		{
@@ -509,23 +519,19 @@ int checkHp(int player, int enemyhp)
 	}
 }
 
-bool andIf(int actFunc)
-{
-	if ((state && act == actFunc) || state == 0)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
 int checkFunc(string funcMain)
 {
+	bool b = 0;
 	for (int i = 0; i < 20; i++)
 	{
-		if (att[i].name == funcMain)
+		for (int j = 0; j < 4; j++)
+		{
+			if ((att[i].wpn[j] == playerDmg) && state)
+			{
+				b = 1;
+			}
+		}
+		if ((att[i].name == funcMain) && b)
 		{
 			return att[i].b;
 			break;
@@ -534,6 +540,7 @@ int checkFunc(string funcMain)
 		{
 			return 2;
 		}
+		b = 0;
 	}
 }
 int funcExe()
@@ -596,7 +603,7 @@ int funcExe()
 		}		
 		turnDmg = 10;
 	}
-	else if (func == "Throw" && (andIf(1) || andIf(4)))
+	else if (func == "Throw" && (playerDmg == 5 || entityDmg == 10))
 	{
 		if (state)
 		{
@@ -605,17 +612,17 @@ int funcExe()
 		}
 		turnDmg = 2 * entityDmg;
 	}
-	else if (func == "Stab" && (andIf(1) || andIf(2) || andIf(3) || playerDmg == 10))
+	else if (func == "Stab" && (playerDmg == 5 || entityDmg == 12 || entityDmg == 10))
 	{
-		if (andIf(1))
+		if (playerDmg == 5)
 		{
 			bonusDmg = 2;
 		}
-		else if (playerDmg == 15 || enemyDmg == 15)
+		else if (entityDmg == 12)
 		{
 			bonusDmg = -5;
 		}
-		else if (playerDmg == 10 || enemyDmg == 10)
+		else if (entityDmg == 10)
 		{
 			bonusDmg = 5;
 		}
@@ -627,7 +634,7 @@ int funcExe()
 		}
 		turnDmg = entityDmg + bonusDmg;
 	}
-	else if ((func == "Slice" || func == "Cut") && (andIf(2) || andIf(3)))
+	else if ((func == "Slice" || func == "Cut") && playerDmg == 12)
 	{
 		if (state && func == "Slice")
 		{
@@ -640,12 +647,12 @@ int funcExe()
 		textRow = " | Dev: Slice and dice!";
 		turnDmg = entityDmg + 2;
 	}
-	else if (func == "Zandatsu" && (andIf(2) || andIf(3)))
+	else if (func == "Zandatsu" && playerDmg == 12)
 	{
 		textRow = " | Dev: I think it's time for Jack... to let 'er rip!";
 		turnDmg = 99;
 	}
-	else if (func == "Whip" && (playerDmg == 10 || enemyDmg == 10))
+	else if (func == "Whip" && entityDmg == 10)
 	{
 		if (state)
 		{
@@ -654,13 +661,13 @@ int funcExe()
 		}
 		turnDmg = entityDmg + 7;
 	}
-	else if ((func == "I am fucking invincible" || func == "I'm fucking invincible") && playerDmg == 7)
+	else if (func == "I'm fucking invincible!" && playerDmg == 7)
 	{
 		func = "Explosion";
 		textRow = " | Dev: I'm fucking invincible!";
 		turnDmg = 99;
 	}
-	else if ((func == "Push" || func == "Thrust") && (playerDmg == 7 || enemyDmg == 7))
+	else if ((func == "Push" || func == "Thrust") && entityDmg == 7)
 	{
 		if (state && func == "Push")
 		{
@@ -673,7 +680,7 @@ int funcExe()
 		textRow = " | Dev: Dodge this!";
 		turnDmg = entityDmg * 2;
 	}
-	else if ((func == "Spin" || func == "Spin Attack") && (playerDmg == 15 || enemyDmg == 15))
+	else if (func == "Spin" && entityDmg == 12)
 	{
 		if (state)
 		{
@@ -691,7 +698,7 @@ int funcExe()
 		}
 		turnDmg = 99;
 	}
-	else if (func == "Slam" && (playerDmg == 7 || enemyDmg == 7))
+	else if (func == "Slam" && entityDmg == 7)
 	{
 		if (state)
 		{

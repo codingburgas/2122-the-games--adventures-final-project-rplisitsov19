@@ -22,9 +22,9 @@ int main()
 		act++;
 		next();
 
-		while (checkHp(playerHp, wolf.hp) == 0)
+		while (checkHp(playerHp, Wolf.hp) == 0)
 		{
-			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name, act, turn, state); //first enemy 'Saber Wolf'
+			stats(playerHp, stick.dmg, stick.name, Wolf.hp, Wolf.dmg, Wolf.name, act, turn, state); //first enemy 'Saber Wolf'
 			text(act, turn);
 			if (state)
 			{
@@ -34,7 +34,7 @@ int main()
 					wrongFunc(funcName);
 				} while (checkFunc(funcName) > 0);
 				system("CLS");
-				wolf.hp = newHp(funcName);
+				Wolf.hp = newHp(funcName);
 			}
 			else
 			{
@@ -51,7 +51,7 @@ int main()
 			{
 				playerHp = 25;
 			}
-			stats(playerHp, stick.dmg, stick.name, wolf.hp, wolf.dmg, wolf.name, act, turn, state);
+			stats(playerHp, stick.dmg, stick.name, Wolf.hp, Wolf.dmg, Wolf.name, act, turn, state);
 			text(act, 10);
 			turn = 1;
 			state = 1;
@@ -63,9 +63,9 @@ int main()
 			if (choice)
 			{
 				act = 2;
-				while (checkHp(playerHp, muson.hp) == 0)
+				while (checkHp(playerHp, Memesoon.hp) == 0)
 				{
-					stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name, act, turn, state); //second enemy B 'Muson'
+					stats(playerHp, sword.dmg, sword.name, Memesoon.hp, Memesoon.dmg, Memesoon.name, act, turn, state); //second enemy B 'Memesoon'
 					text(act, turn);
 					if (state)
 					{
@@ -75,7 +75,7 @@ int main()
 							wrongFunc(funcName);
 						} while (checkFunc(funcName) > 0);
 						system("CLS");
-						muson.hp = newHp(funcName);
+						Memesoon.hp = newHp(funcName);
 					}
 					else
 					{
@@ -88,7 +88,7 @@ int main()
 
 				if (checkHp(playerHp, 1) != 2)
 				{
-					stats(playerHp, sword.dmg, sword.name, muson.hp, muson.dmg, muson.name, act, turn, state);
+					stats(playerHp, sword.dmg, sword.name, Memesoon.hp, Memesoon.dmg, Memesoon.name, act, turn, state);
 					text(act, 10);
 					next();
 					wpnDmg = shield.dmg;
@@ -98,9 +98,9 @@ int main()
 			else
 			{
 				act = 3;
-				while (checkHp(playerHp, vent.hp) == 0)
+				while (checkHp(playerHp, Etrangere.hp) == 0)
 				{
-					stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name, act, turn, state); //second enemy A 'Vent'
+					stats(playerHp, sword.dmg, sword.name, Etrangere.hp, Etrangere.dmg, Etrangere.name, act, turn, state); //second enemy A 'Etrangere'
 					text(act, turn);
 					if (state)
 					{
@@ -110,7 +110,7 @@ int main()
 							wrongFunc(funcName);
 						} while (checkFunc(funcName) > 0);
 						system("CLS");
-						vent.hp = newHp(funcName);
+						Etrangere.hp = newHp(funcName);
 					}
 					else
 					{
@@ -123,7 +123,7 @@ int main()
 
 				if (checkHp(playerHp, 1) != 2)
 				{
-					stats(playerHp, sword.dmg, sword.name, vent.hp, vent.dmg, vent.name, act, turn, state);
+					stats(playerHp, sword.dmg, sword.name, Etrangere.hp, Etrangere.dmg, Etrangere.name, act, turn, state);
 					text(act, 10);
 					next();
 					wpnDmg = spear.dmg;
@@ -142,9 +142,9 @@ int main()
 			state = 1;
 			act = 4;
 
-			while (checkHp(playerHp, prez.hp) == 0)
+			while (checkHp(playerHp, Prez.hp) == 0)
 			{
-				stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name, act, turn, state); //boss 'The President'
+				stats(playerHp, wpnDmg, wpnName, Prez.hp, Prez.dmg, Prez.name, act, turn, state); //boss 'The President'
 				text(act, turn);
 				if (state)
 				{
@@ -154,7 +154,7 @@ int main()
 						wrongFunc(funcName);
 					} while (checkFunc(funcName) > 0);
 					system("CLS");
-					prez.hp = newHp(funcName);
+					Prez.hp = newHp(funcName);
 				}
 				else
 				{
@@ -167,7 +167,7 @@ int main()
 
 			if (checkHp(playerHp, 1) != 2)
 			{
-				stats(playerHp, wpnDmg, wpnName, prez.hp, prez.dmg, prez.name, act, turn, state);
+				stats(playerHp, wpnDmg, wpnName, Prez.hp, Prez.dmg, Prez.name, act, turn, state);
 				text(act, 10);
 				next();
 				act++;
