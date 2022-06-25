@@ -384,9 +384,6 @@ void text(int actMain, int turnMain)
 			case 3:
 				textRow = " | Saber Wolf: Someone on your intelligence level can never do anything to me!";
 				break;
-			case 4:
-				textRow = " | ";
-				break;
 			}
 			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
@@ -423,9 +420,6 @@ void text(int actMain, int turnMain)
 			case 2:
 				textRow = " | Memesoon: Free will is the ability to create memes, so take this meme to your grave!";
 				break;
-			case 3:
-				textRow = " | Memesoon: ";
-				break;
 			}
 			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
@@ -433,7 +427,7 @@ void text(int actMain, int turnMain)
 	case 3:
 		if (turn == 0)
 		{
-			textRow = " | Etrangere: ";
+			textRow = " | Etrangere: Good night!";
 			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn == 10)
@@ -459,9 +453,6 @@ void text(int actMain, int turnMain)
 			case 2:
 				textRow = " | Etrangere: I will tear you apart!";
 				break;
-			case 3:
-				textRow = " | Etrangere: Good night!";
-				break;
 			}
 			cout << textRow << spaceFunc(textRow) << textAttack();
 		}
@@ -469,7 +460,7 @@ void text(int actMain, int turnMain)
 	case 4:
 		if (turn == 0)
 		{
-			textRow = " | The President: ";
+			textRow = " | The President: Played college ball, ya know";
 			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn == 10)
@@ -494,9 +485,6 @@ void text(int actMain, int turnMain)
 				break;
 			case 2:
 				textRow = " | The President: Don't mess with THIS president!";
-				break;
-			case 3:
-				textRow = " | The President: Played college ball, ya know";
 				break;
 			}
 			cout << textRow << spaceFunc(textRow) << textAttack();
