@@ -1,16 +1,16 @@
 #include "Trapped-Developer-functions.hpp"
 int main()
 {
-	bool game;
-	int playerHp = 25, wpnDmg;
-	int act = 0, turn = 1;
-	bool state = 1, choice;
-	string wpnName, funcName = "";
-	funcSet();
-	setEnemyWpn();
-
 	while (true)
 	{
+		bool game;
+		int playerHp = 25, wpnDmg;
+		int act = 0, turn = 1;
+		bool state = 1, choice;
+		string wpnName, funcName = "";
+		funcSet();
+		setEnemy();
+
 		trappedDev();
 		cin >> game;
 		next();

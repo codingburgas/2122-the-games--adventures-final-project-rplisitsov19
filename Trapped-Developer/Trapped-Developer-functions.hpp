@@ -45,26 +45,29 @@ struct weapon
 }stick(5, "Stick"), sword(12, "Cutting edge Sword"), spear(10, "Spaghetti Spear"), shield(7, "Salvaged Shield");;
 struct enemy
 {
-	enemy(int hp, string name)
+	enemy(string name)
 	{
-		enemy::hp = hp;
 		enemy::name = name;
 	}
 	int hp;
 	string name;
 	string wpn;
 	int dmg;
-}Wolf(21, "Saber Wolf"), Etrangere(30, "Etrangere"), Memesoon(35, "Memesoon"), Prez(40, "The President");
-void setEnemyWpn()
+}Wolf("Saber Wolf"), Etrangere("Etrangere"), Memesoon("Memesoon"), Prez("The President");
+void setEnemy()
 {
 	Wolf.wpn = sword.name;
 	Wolf.dmg = sword.dmg;
+	Wolf.hp = 21;
 	Etrangere.wpn = spear.name;
 	Etrangere.dmg = spear.dmg;
+	Etrangere.hp = 30;
 	Memesoon.wpn = shield.name;
 	Memesoon.dmg = shield.dmg;
+	Memesoon.hp = 35;
 	Prez.wpn = "Nanomachines";
 	Prez.dmg = 6;
+	Prez.hp = 40;
 }
 
 void next()
