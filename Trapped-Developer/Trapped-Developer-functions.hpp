@@ -317,7 +317,7 @@ void text(int actMain, int turnMain)
 	act = actMain;
 	turn = turnMain;
 
-	if (turn == 0)
+	if (act == 0 || act == 5)
 	{
 		cout << empty();
 	}
@@ -340,8 +340,9 @@ void text(int actMain, int turnMain)
 	case 1:
 		if (turn == 0)
 		{
-			textRow = " | Saber Wolf: Typical human, dissapointing.";
-			cout << preRow[1] << endl << textRow << spaceFunc(textRow);
+			textRow = " | Saber Wolf: This is it for you, monkey!";
+			cout << textRow << spaceFunc(textRow);
+			//the enemy killed you
 		}
 		else if (turn == 10)
 		{
@@ -384,7 +385,7 @@ void text(int actMain, int turnMain)
 				textRow = " | Saber Wolf: Someone on your intelligence level can never do anything to me!";
 				break;
 			case 4:
-				textRow = " | Saber Wolf: This is it for you, monkey!";
+				textRow = " | ";
 				break;
 			}
 			cout << textRow << spaceFunc(textRow) << textAttack();
@@ -401,7 +402,7 @@ void text(int actMain, int turnMain)
 			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
 			textRow = " | Memesoon: At least I passed down my memes to you...";
 			cout << textRow << spaceFunc(textRow);
-			textRow = " | Dev: Yeah, yeah, I know, order of the universe and all that.";
+			textRow = " | Dev: ...";
 			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn == 1)
@@ -430,44 +431,10 @@ void text(int actMain, int turnMain)
 		}
 		break;
 	case 3:
-if (turn == 0)
-{
-	//the enemy defeated you + finishing blow
-}
-else if (turn == 10)
-{
-	cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
-	//you managed to defeat the enemy + finishing blow
-}
-else if (turn == 1)
-{
-	//oh no it's a monster you have to attack
-}
-else if (turn % 2 == 0)
-{
-	cout << textRow << spaceFunc(textRow) << textAttack();
-}
-else
-{
-	switch (turn / 2)
-	{
-	case 1:
-		textRow = " | Come, le mec!";
-		break;
-	case 2:
-		textRow = " | I will tear you apart!";
-		break;
-	case 3:
-		textRow = " | Good night!";
-		break;
-	}
-	cout << textRow << spaceFunc(textRow) << textAttack();
-}
-break;
-	case 4:
 		if (turn == 0)
 		{
-			//the enemy defeated you + finishing blow
+			textRow = " | Etrangere: ";
+			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn == 10)
 		{
@@ -487,13 +454,49 @@ break;
 			switch (turn / 2)
 			{
 			case 1:
-				textRow = " | Played college ball, ya know";
+				textRow = " | Etrangere: Come, le mec!";
 				break;
 			case 2:
-				textRow = " | Don't mess with this president!";
+				textRow = " | Etrangere: I will tear you apart!";
 				break;
 			case 3:
-				textRow = " | Taste the power of nanomachines!";
+				textRow = " | Etrangere: Good night!";
+				break;
+			}
+			cout << textRow << spaceFunc(textRow) << textAttack();
+		}
+		break;
+	case 4:
+		if (turn == 0)
+		{
+			textRow = " | The President: ";
+			cout << textRow << spaceFunc(textRow);
+		}
+		else if (turn == 10)
+		{
+			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
+			//you managed to defeat the enemy + finishing blow
+		}
+		else if (turn == 1)
+		{
+			//oh no it's a monster you have to attack
+		}
+		else if (turn % 2 == 0)
+		{
+			cout << textRow << spaceFunc(textRow) << textAttack();
+		}
+		else
+		{
+			switch (turn / 2)
+			{
+			case 1:
+				textRow = " | The President: Taste the power of nanomachines!";
+				break;
+			case 2:
+				textRow = " | The President: Don't mess with THIS president!";
+				break;
+			case 3:
+				textRow = " | The President: Played college ball, ya know";
 				break;
 			}
 			cout << textRow << spaceFunc(textRow) << textAttack();
@@ -825,6 +828,11 @@ void wrongFunc(string funcName)
 	{
 		cout << "\n I have already used this function and I can't use it again! I have to think of another function.\n  *some functions have more than one name*\n ";
 	}
+}
+
+void funcEqualizer(string funcMain)
+{
+	func = funcMain;
 }
 
 void trappedDev()

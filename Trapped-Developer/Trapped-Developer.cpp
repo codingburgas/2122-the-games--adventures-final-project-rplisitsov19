@@ -182,8 +182,24 @@ int main()
 
 		if (checkHp(playerHp, 1) == 2)
 		{
-			//text(act, 0); //the enemy defeats the player
-			//next();
+			switch (act)
+			{
+			case 1:
+				stats(playerHp, stick.dmg, stick.name, Wolf.hp, Wolf.dmg, Wolf.name, act, turn, state); //first enemy 'Saber Wolf'
+				break;
+			case 2:
+				stats(playerHp, sword.dmg, sword.name, Memesoon.hp, Memesoon.dmg, Memesoon.name, act, turn, state); //second enemy B 'Memesoon'
+				break;
+			case 3:
+				stats(playerHp, sword.dmg, sword.name, Etrangere.hp, Etrangere.dmg, Etrangere.name, act, turn, state); //second enemy A 'Etrangere'
+				break;
+			case 4:
+				stats(playerHp, wpnDmg, wpnName, Prez.hp, Prez.dmg, Prez.name, act, turn, state); //boss 'The President'
+				break;
+			}
+			funcEqualizer(funcName);
+			text(act, 0); //the enemy defeats the player
+			next();
 
 			gameOver();
 			next();
