@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500&display=swap');
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background-color: #24252A;
+    color: ivory;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 10%;
+}
+
+
+li, a, button{
+    font-weight: 500;
+    font-size: 16px;
+    color: #ebf3f5;
+    text-decoration: none;
+    align-items: left;
+}
+
+
+
+.nav_links{
+    list-style: none;
+}
+
+
+.nav_links li{
+    display: inline-block;
+    padding: 0px 15px;
+}
+
+
+
+.nav_links li a{
+    transition: all 0.3s ease 0s;
+}
+
+
+
+
+.nav_links li a:hover {
+    color: cadetblue;
+}
+
+.container{
+    text-align: center;
+    background: white;
+}
+
+.header{
+    padding-top: 30px;
+    color: #445;
+    font-size: 25px;
+    margin: auto;
+    line-height: 50px;
+}
+
+.sub-container{
+    max-width: 1200px;
+    margin: auto;
+    padding: 60px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+/* This displays different members of our team */
+.teams{
+    margin: 21px;
+    padding: 22px;
+    max-width: 30%;
+    cursor: pointer;
+    transition: 0.5s;
+    box-sizing: border-box;
+}
+
+
+
+/* This changes the background color after you hover the image */
+
+
+
+.teams img{
+    width: 200px;
+    height: 200px;
+}
+
+
+.name{
+    padding: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.design{
+    font-style: italic;
+    color: rgb(0, 0, 0)
+}
+
+
+.about{
+    margin: 20px 0;
+    font-weight: lighter;
+    color: #4e4e4e;
+}
+
+.about:hover{
+    color: #ffff;
+}
