@@ -21,7 +21,7 @@ void funcSet()
 {
 	att[0].name = "Hit", att[1].name = "Slash", att[2].name = "Attack", att[3].name = "Bonk", att[4].name = "Swing", att[5].name = "Charge", att[6].name = "Punch";
 	att[7].name = "Kick", att[8].name = "Throw", att[9].name = "Stab", att[10].name = "Slice", att[11].name = "Cut", att[12].name = "Zandatsu", att[13].name = "Whip";
-	att[14].name = "I'm fucking invincible!", att[15].name = "Push", att[16].name = "Thrust", att[17].name = "Spin", att[18].name = "Bolognese", att[19].name = "Slam";
+	att[14].name = "I'm fucking invincible!", att[15].name = "Push", att[16].name = "Thrust", att[17].name = "Spin", att[18].name = "Spaghetti bolognese", att[19].name = "Slam";
 	for (int i = 0; i < 8; i++)
 	{
 		att[i].wpn[0] = 5, att[i].wpn[1] = 12, att[i].wpn[2] = 10, att[i].wpn[3] = 7;
@@ -351,7 +351,7 @@ void text(int actMain, int turnMain)
 			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
 			textRow = " |  CONGRATULATIONS! YOU DEFEATED 'Saber Wolf'!";
 			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
-			textRow = " |  CONGRATULATIONS! YOU FOUND 'Cutting edge Sword' IN ITS BLOODY CORPSE!";
+			textRow = " |  CONGRATULATIONS! YOU FOUND 'Cutting edge Sword' INSIDE ITS CORPSE!";
 			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
 		}
 		else if (turn == 1)
@@ -393,6 +393,7 @@ void text(int actMain, int turnMain)
 		{
 			textRow = " | Memesoon: Too bad you'll die before passing down any memes.";
 			cout << textRow << spaceFunc(textRow);
+			//the enemy killed you
 		}
 		else if (turn == 10)
 		{
@@ -404,7 +405,14 @@ void text(int actMain, int turnMain)
 		}
 		else if (turn == 1)
 		{
-			//oh no it's a monster you have to attack
+			textRow = " | Memesoon: Feasting on the insides of your enemies, huh.";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " |           How pleased you are to chop away, Jack the Ripper.";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " |           I am Memesoon, of the Lords of Destruction.";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | Dev: Pretty sure I thought of that name when I was drunk.";
+			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn % 2 == 0)
 		{
@@ -429,6 +437,7 @@ void text(int actMain, int turnMain)
 		{
 			textRow = " | Etrangere: Good night!";
 			cout << textRow << spaceFunc(textRow);
+			//the enemy killed you
 		}
 		else if (turn == 10)
 		{
@@ -462,15 +471,24 @@ void text(int actMain, int turnMain)
 		{
 			textRow = " | The President: Played college ball, ya know";
 			cout << textRow << spaceFunc(textRow);
+			//the enemy killed you
 		}
 		else if (turn == 10)
 		{
 			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
-			//you managed to defeat the enemy + finishing blow
+			textRow = " | The President: My 'schemes' won't die with me.";
+			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn == 1)
 		{
-			//oh no it's a monster you have to attack
+			textRow = " | The President: Well if it isn't saucy player1?";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | Dev: Your schemes end here President!";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | The President: Idiot.";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | Dev: Pfft.";
+			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn % 2 == 0)
 		{
@@ -683,7 +701,7 @@ int funcExe()
 		}
 		turnDmg = entityDmg + 8;
 	}
-	else if (func == "Spaghetti Bolognese" && playerDmg == 10)
+	else if (func == "Spaghetti bolognese" && playerDmg == 10)
 	{
 		if (state)
 		{
