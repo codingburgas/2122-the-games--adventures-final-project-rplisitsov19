@@ -342,7 +342,6 @@ void text(int actMain, int turnMain)
 		{
 			textRow = " | Saber Wolf: This is it for you, monkey!";
 			cout << textRow << spaceFunc(textRow) << textAttack();
-			//the enemy killed you
 		}
 		else if (turn == 10)
 		{
@@ -393,7 +392,6 @@ void text(int actMain, int turnMain)
 		{
 			textRow = " | Memesoon: Too bad you'll die before passing down any memes.";
 			cout << textRow << spaceFunc(textRow);
-			//the enemy killed you
 		}
 		else if (turn == 10)
 		{
@@ -401,7 +399,11 @@ void text(int actMain, int turnMain)
 			textRow = " | Memesoon: At least I passed down my memes to you...";
 			cout << textRow << spaceFunc(textRow);
 			textRow = " | Dev: ...";
-			cout << textRow << spaceFunc(textRow);
+			cout << textRow << spaceFunc(textRow) << endl;
+			textRow = " |  CONGRATULATIONS! YOU DEFEATED 'Memesoon'!";
+			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
+			textRow = " |  CONGRATULATIONS! YOU FOUND 'Salvaged Shield' INSIDE HIS CORPSE!";
+			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
 		}
 		else if (turn == 1)
 		{
@@ -437,16 +439,25 @@ void text(int actMain, int turnMain)
 		{
 			textRow = " | Etrangere: Good night!";
 			cout << textRow << spaceFunc(textRow);
-			//the enemy killed you
 		}
 		else if (turn == 10)
 		{
 			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
-			//you managed to defeat the enemy + finishing blow
+			textRow = " | Etrangere: Je meurs...";
+			cout << textRow << spaceFunc(textRow) << endl;
+			textRow = " |  CONGRATULATIONS! YOU DEFEATED 'Etrangere'!";
+			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
+			textRow = " |  CONGRATULATIONS! YOU FOUND 'Spaghetti Spear' INSIDE HER CORPSE!";
+			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
 		}
 		else if (turn == 1)
 		{
-			//oh no it's a monster you have to attack
+			textRow = " | Etrangere: Bonjour!";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | Dev: Sorry, Mademoiselle, but I don't speak Spanish.";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | Etrangere: Ne baise pas avec moi mec.";
+			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn % 2 == 0)
 		{
@@ -471,13 +482,20 @@ void text(int actMain, int turnMain)
 		{
 			textRow = " | The President: Played college ball, ya know";
 			cout << textRow << spaceFunc(textRow);
-			//the enemy killed you
 		}
 		else if (turn == 10)
 		{
 			cout << textRow << spaceFunc(textRow) << textAttack() << preRow[1] << endl;
-			textRow = " | The President: My 'schemes' won't die with me.";
+			textRow = " | Dev: Sorry but I don't want to hear your last words.";
 			cout << textRow << spaceFunc(textRow);
+			textRow = " | The President: Huh?";
+			cout << textRow << spaceFunc(textRow);
+			textRow = " | Dev: I want to get out of here as soon as possible.";
+			cout << textRow << spaceFunc(textRow) << endl;
+			textRow = " |  CONGRATULATIONS! YOU DEFEATED 'The President'!";
+			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
+			textRow = " |  CONGRATULATIONS! YOU BEAT THE GAME!";
+			cout << textRow << spaceFunc(textRow) << preRow[1] << endl;
 		}
 		else if (turn == 1)
 		{
@@ -485,9 +503,9 @@ void text(int actMain, int turnMain)
 			cout << textRow << spaceFunc(textRow);
 			textRow = " | Dev: Your schemes end here President!";
 			cout << textRow << spaceFunc(textRow);
-			textRow = " | The President: Idiot.";
+			textRow = " | The President: My 'schemes' won't die with me.";
 			cout << textRow << spaceFunc(textRow);
-			textRow = " | Dev: Pfft.";
+			textRow = " | Dev: We'll see about that.";
 			cout << textRow << spaceFunc(textRow);
 		}
 		else if (turn % 2 == 0)
@@ -509,7 +527,8 @@ void text(int actMain, int turnMain)
 		}
 		break;
 	case 5:
-		//epilogue
+		textRow = " | Dev: Finally I can get out of here! I can always return though.";
+		cout << textRow << spaceFunc(textRow);
 		break;
 	}
 	cout << preRow[2] << endl;
@@ -530,7 +549,6 @@ int checkHp(int player, int enemyhp)
 		return 0;
 	}
 }
-
 int checkFunc(string funcMain)
 {
 	bool b = 0;
@@ -555,6 +573,7 @@ int checkFunc(string funcMain)
 		b = 0;
 	}
 }
+
 int funcExe()
 {
 	int bonusDmg = 0;
@@ -818,7 +837,7 @@ void choose()
 	cout << empty() << preRow[0] << endl << preRow[1] << endl;
 	textRow = " | Dev: Damn, I didn't know I had made him this hard. I have to balance him later.";
 	cout << textRow << spaceFunc(textRow);
-	textRow = " |      ";
+	textRow = " |      And this in front of me should be the russian jungle.";
 	cout << textRow << spaceFunc(textRow) << preRow[2] << endl;
 	cout << "\n *type 0 or 1, depending on which path you want to take. 0 for left and 1 for right.*\n ";
 }
@@ -842,15 +861,16 @@ void beaten(bool b)
 	cout << empty() << preRow[0] << endl << preRow[1] << endl;
 	if (b)
 	{
-		textRow = " | Dev: I managed to beat Memesoon";
+		textRow = " | Dev: I managed to beat Memesoon. That means it's time for The President.";
 		cout << textRow << spaceFunc(textRow);
 	}
 	else
 	{
-		textRow = " | Dev: I managed to beat Etrangere";
+		textRow = " | Dev: I managed to beat Etrangere. That means it's time for The President.";
 		cout << textRow << spaceFunc(textRow);
 	}
-	cout << preRow[2] << endl;
+	textRow = " |      And this flower field should be where I have to fight him.";
+	cout << textRow << spaceFunc(textRow) << preRow[2] << endl;
 }
 
 void trappedDev()

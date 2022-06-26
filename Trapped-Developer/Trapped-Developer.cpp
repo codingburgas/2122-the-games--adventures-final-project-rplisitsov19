@@ -213,6 +213,7 @@ int main()
 		if (checkHp(playerHp, 1) == 2)
 		{
 			state = !state;
+
 			playerHp = newHp(funcName);
 			switch (act)
 			{
