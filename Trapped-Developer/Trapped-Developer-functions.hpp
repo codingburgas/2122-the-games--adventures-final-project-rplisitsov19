@@ -262,7 +262,7 @@ void stats(int playerHpMain, int playerDmgMain, string wpnName, int enemyHpMain,
 
 string empty()
 {
-	return "\n\n\n\n\n\n";
+	return "\n\n\n\n\n";
 }
 string spaceFunc(string row)
 {
@@ -284,7 +284,7 @@ string textAttack()
 		dmgText = dmg2 + dmg1;
 	}
 
-	if (turn % 2 == 0)
+	if (turn % 2 == 0 && turn != 0)
 	{
 		part = " |  THE PLAYER USED '";
 		string hp3(1, char(hp0(enemyHp)) + 48);
@@ -341,7 +341,7 @@ void text(int actMain, int turnMain)
 		if (turn == 0)
 		{
 			textRow = " | Saber Wolf: This is it for you, monkey!";
-			cout << textRow << spaceFunc(textRow);
+			cout << textRow << spaceFunc(textRow) << textAttack();
 			//the enemy killed you
 		}
 		else if (turn == 10)
@@ -797,9 +797,11 @@ int newHp(string funcMain)
 
 void choose()
 {
+	cout << empty() << preRow[0] << endl << preRow[1] << endl;
 	textRow = " | Dev: Damn, I didn't know I had made him this hard. I have to balance him later.";
 	cout << textRow << spaceFunc(textRow);
 	textRow = " |      ";
+	cout << textRow << spaceFunc(textRow) << preRow[2] << endl;
 	cout << "\n *type 0 or 1, depending on which path you want to take. 0 for left and 1 for right.*\n ";
 }
 void type()
@@ -817,10 +819,20 @@ void wrongFunc(string funcName)
 		cout << "\n I have already used this function and I can't use it again! I have to think of another function.\n  *some functions have more than one name*\n ";
 	}
 }
-
-void funcEqualizer(string funcMain)
+void beaten(bool b)
 {
-	func = funcMain;
+	cout << empty() << preRow[0] << endl << preRow[1] << endl;
+	if (b)
+	{
+		textRow = " | Dev: I managed to beat Memesoon";
+		cout << textRow << spaceFunc(textRow);
+	}
+	else
+	{
+		textRow = " | Dev: I managed to beat Etrangere";
+		cout << textRow << spaceFunc(textRow);
+	}
+	cout << preRow[2] << endl;
 }
 
 void trappedDev()

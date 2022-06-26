@@ -38,7 +38,14 @@ int main()
 			}
 			else
 			{
-				playerHp = newHp(funcName);
+				if (turn == 8)
+				{
+					playerHp = 0;
+				}
+				else
+				{
+					playerHp = newHp(funcName);
+				}				
 				next();
 			}
 			state = !state;
@@ -46,16 +53,16 @@ int main()
 		}
 
 		if (checkHp(playerHp, 1) != 2)
-		{
-			if (!game)
-			{
-				playerHp = 25;
-			}
+		{			
 			stats(playerHp, stick.dmg, stick.name, Wolf.hp, Wolf.dmg, Wolf.name, act, turn, state);
 			text(act, 10);
 			turn = 1;
 			state = 1;
 			next();
+			if (!game)
+			{
+				playerHp = 25;
+			}
 
 			choose();
 			cin >> choice;
@@ -79,7 +86,14 @@ int main()
 					}
 					else
 					{
-						playerHp = newHp(funcName);
+						if (turn == 6)
+						{
+							playerHp = 0;
+						}
+						else
+						{
+							playerHp = newHp(funcName);
+						}
 						next();
 					}
 					state = !state;
@@ -114,7 +128,14 @@ int main()
 					}
 					else
 					{
-						playerHp = newHp(funcName);
+						if (turn == 6)
+						{
+							playerHp = 0;
+						}
+						else
+						{
+							playerHp = newHp(funcName);
+						}
 						next();
 					}
 					state = !state;
@@ -134,6 +155,8 @@ int main()
 
 		if (checkHp(playerHp, 1) != 2)
 		{
+			beaten(choice);
+			next();
 			if (!game)
 			{
 				playerHp = 25;
@@ -158,7 +181,14 @@ int main()
 				}
 				else
 				{
-					playerHp = newHp(funcName);
+					if (turn == 6)
+					{
+						playerHp = 0;
+					}
+					else
+					{
+						playerHp = newHp(funcName);
+					}
 					next();
 				}
 				state = !state;
@@ -182,6 +212,8 @@ int main()
 
 		if (checkHp(playerHp, 1) == 2)
 		{
+			state = !state;
+			playerHp = newHp(funcName);
 			switch (act)
 			{
 			case 1:
@@ -197,7 +229,6 @@ int main()
 				stats(playerHp, wpnDmg, wpnName, Prez.hp, Prez.dmg, Prez.name, act, turn, state); //boss 'The President'
 				break;
 			}
-			funcEqualizer(funcName);
 			text(act, 0); //the enemy defeats the player
 			next();
 
