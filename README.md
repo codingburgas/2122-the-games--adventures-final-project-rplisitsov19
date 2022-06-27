@@ -1,3 +1,10 @@
+<p align = "center">
+  <img src = "images/logo.png" alt = "logo" width="550px">
+</p>
+
+<hr>
+
+<br>
 
 ## 📝 Table of contents
 
@@ -15,7 +22,6 @@ The task was to create an adventure game. We did that. The game has multiple ene
 ## ⚒️ Built Using <a name="built_using"></a>
 
 - [Visual Studio](https://visualstudio.microsoft.com/) - Application
-- [Visual Studio Code] (https://code.visualstudio.com) - HTML  website
 - [Word](https://www.microsoft.com/en-us/microsoft-365/word) - Documentation
 - [PowerPoint](https://www.microsoft.com/en-us/microsoft-365/powerpoint) - Presentation
 - [Excel](https://www.microsoft.com/en-us/microsoft-365/excel) - QA Documentation
