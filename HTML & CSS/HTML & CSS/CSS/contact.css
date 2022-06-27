@@ -5,9 +5,8 @@
 
 /* This displays the background image and the font used*/
 body{
-     background-image: linear-gradient(rgba(8, 17, 51, 0.7), rgba(4,9,30,0.7)), url(images/contactusbg.png);
-    background-position: center;
-    background-size: cover;
+    background-color: #24252A;
+    color: ivory;
     font-size: 14px;
     font-family: 'Poppins', sans-serif;
 }

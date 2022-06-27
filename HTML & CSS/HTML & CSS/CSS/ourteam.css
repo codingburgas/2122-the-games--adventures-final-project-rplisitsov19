@@ -11,46 +11,48 @@
 
 
 
-header{
+nav{
     display: flex;
+    padding: 4% 8%;
     justify-content: space-between;
-    padding: 30px 10%;
+    align-items: center;
 }
 
-
-li, a, button{
-    font-weight: 500;
-    font-size: 16px;
-    color: #ebf3f5;
-    text-decoration: none;
-    align-items: left;
+.nav img{
+    width: 50px;
 }
 
-
-
-.nav_links{
+.nav-links{
+    flex:1;
+    text-align: left;
+}
+.nav-links ul li{
     list-style: none;
-}
-
-
-.nav_links li{
     display: inline-block;
-    padding: 0px 15px;
+    padding: 20px 34px;
+    position: relative;
 }
 
+.nav-links ul li a{
+    color: aliceblue;
+    font-size: 15px;
+    text-decoration: none;
 
-
-.nav_links li a{
-    transition: all 0.3s ease 0s;
 }
 
-
-
-
-.nav_links li a:hover {
-    color: cadetblue;
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 3px;
+    display: block;
+    margin:auto;
+    background: #fafafa;
+    transition: 0.3s;
 }
 
+.nav-links ul li:hover::after{
+    width: 110%;
+}
 .container{
     text-align: center;
     background: white;
