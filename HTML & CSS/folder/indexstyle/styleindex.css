@@ -151,7 +151,7 @@ h1{
 }
 h3{
     font-size: 22px;
-    color:yellow;
+    color:rgb(255, 0, 0);
 }
 /*explore section*/
 #explore{
@@ -249,4 +249,3 @@ footer{
 .socials a i{
     font-size: 38px;
 }
-
