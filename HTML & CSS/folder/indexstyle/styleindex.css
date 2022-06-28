@@ -1,0 +1,251 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body{
+    background-color: rgb(255, 255, 255);
+    font-family: sans-serif;
+}
+
+
+header{
+    width: 100%;
+    height: 100px;
+    margin: auto;
+    background-color: transparent;
+    background-size: cover;
+}
+
+.logo{
+    position: fixed;
+    margin-left: 35px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;    
+    list-style: none;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+nav{
+    position: fixed;
+    background-color: #000;
+    width: 100%;
+}
+
+nav ul{
+    list-style: none;
+    background: rgba(0, 0, 0, 0);
+    overflow: hidden;
+    color: rgb(0, 0, 0);
+    padding: 0;
+    text-align: center;
+    margin: 0;
+    margin-right: 20px;
+    transition: 1s;
+}
+
+nav.black ul{
+    background: #000;
+}
+
+nav ul li{
+    display: inline-block;
+    padding: 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+
+
+nav ul li a:hover{
+    border-bottom: 2px solid white;
+    transition: 0.4 ease;
+    transition-duration: 100ms;
+    color:white;
+}
+
+
+
+.download{
+    justify-content: center;
+    align-items: center;
+    position:static;
+    display: flex; 
+}
+.btn{
+    border-radius: 10px;
+    width: 350px;
+    height: 75px;
+    font-size: 2.1rem;
+    background-color: rgba(90, 90, 90, 0.897);
+    cursor: pointer;
+    border: none;
+    color: yellow;
+    transition: .3s;
+    margin-top: 200px;
+    
+}
+
+.btn:hover{
+    background-color: rgba(0,126,169,1);
+    color: red;
+}
+
+#home{
+    background-color: rgb(66, 62, 62);
+    background-repeat: no-repeat;  
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 2px solid red;
+    width: 100%;
+    height: 95%;
+    animation: change 15s infinite ease-in-out;
+}
+
+@keyframes change{
+    0%
+    {
+        background-image: url(indexphotos/developers.png);
+        background-size: cover;
+    }
+    50%
+    {
+        background-image: url(indexphotos/developers.png);
+        background-size: cover;
+
+    }
+    100%
+    {
+        background-image: url(indexphotos/developers.png);
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+.gamename{
+    font-family: Arial, 'Times New Roman', sans-serif;;
+    text-align: center;
+    color: white;
+    font-size: 55px;
+    margin-top: 70px;
+}
+
+
+h1{
+    font-size: 36px;
+}
+h3{
+    font-size: 22px;
+    color:rgb(255, 0, 0);
+}
+/*explore section*/
+#explore{
+    background-image: url(indexphotos/forest.png); 
+    background-color: rgb(66, 62, 62);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0px;
+    border-bottom: 2px solid red;
+    font-size: 20px;
+    padding: 0;
+    width: 100%; 
+    overflow-x: hidden;
+}
+.explore{
+    text-align: right;
+    color: white;
+    margin-right: 75px;
+    margin-top: 200px;
+    margin-bottom: 180px;
+    font-size: 16px;
+}
+
+#enemies{
+    background-image:linear-gradient(to right, rgb(39, 37, 37, 0.856), rgba(39, 37, 37, 0.856)), url('indexphotos/enemies.jpg');
+    background-size: cover;
+    background-color: rgb(66, 62, 62);
+    background-position: center;
+    border-bottom: 2px solid red;
+    font-size: 20px;
+    padding: 0;
+    width: 100%; 
+    overflow-x: hidden;
+}
+.enemies{
+    text-align: left;
+    color: white;
+    margin-left: 75px;
+    margin-top: 200px;
+    margin-bottom: 180px;
+    font-size: 16px;
+}
+
+
+footer{
+    background-color: rgb(41, 41, 41);
+    height: auto;
+    width: 100%;
+    font-family: Arial, 'Times New Roman', sans-serif;
+    padding-top: -5px;
+    padding-bottom: -5px;
+    color:white;
+    overflow-x: hidden;
+    column-count: 2;
+}
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.footer-content p{
+    text-align: center;
+    margin: 20px auto;
+    line-height: 28px;
+    padding-top: 2px;
+    font-size: 16px;
+    text-decoration: none;
+    font-family: Arial, 'Times New Roman', sans-serif;
+    list-style: none;
+    color: white;
+    font-size: 18px;
+}
+.footer-content a{
+    padding-top: 20px;
+    margin-bottom: 5px;
+}
+
+.socials{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-right: 1000px;
+    margin-right: 43px;
+    margin-bottom: 5px;
+}
+.socials li{
+    margin: 0 20px;
+}
+.socials a{
+    text-decoration: none;
+    color: white;
+}
+.socials a i{
+    font-size: 38px;
+}
